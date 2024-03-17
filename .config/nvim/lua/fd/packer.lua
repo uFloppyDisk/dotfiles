@@ -42,9 +42,9 @@ return require('packer').startup(function(use)
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
 
-  use({ 
+  use({
 	  'rose-pine/neovim', as = 'rose-pine',
-	  config = function() 
+	  config = function()
 		  vim.cmd('colorscheme rose-pine')
 	  end
   })
