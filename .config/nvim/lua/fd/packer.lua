@@ -42,6 +42,14 @@ return require('packer').startup(function(use)
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
 
+  use { 
+    'folke/trouble.nvim',
+    cmd = "Trouble",
+    config = function ()
+      require("trouble").setup({})
+    end
+  }
+
   use({
 	  'rose-pine/neovim', as = 'rose-pine',
 	  config = function()
