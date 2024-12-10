@@ -6,12 +6,12 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
 	'eslint',
-	'tsserver'
+	'ts_ls'
   },
   handlers = {
     lsp.default_setup,
-    tsserver = function()
-      require('lspconfig').tsserver.setup({
+    ts_ls = function()
+      require('lspconfig').ts_ls.setup({
 
       })
     end,
@@ -91,7 +91,7 @@ if not lsp_conficts then
 end
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = "LspAttach_conflicts",
-	desc = "Ensure either Volar XOR tsserver are running",
+	desc = "Ensure either Volar XOR ts_ls are running",
 	callback = function(args)
 		if not (args.data and args.data.client_id) then
 			return
@@ -104,14 +104,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- if client.name == "volar" or require("lspconfig").util.root_pattern("nuxt.config.ts")(vim.fn.getcwd()) then
 		if client.name == "volar" then
 			for _, client_ in pairs(active_clients) do
-				-- stop tsserver if volar is already active
-				if client_.name == "tsserver" then
+				-- stop ts_ls if volar is already active
+				if client_.name == "ts_ls" then
 					client_.stop()
 				end
 			end
-		elseif client.name == "tsserver" then
+		elseif client.name == "ts_ls" then
 			for _, client_ in pairs(active_clients) do
-				-- prevent tsserver from starting if volar is already active
+				-- prevent ts_ls from starting if volar is already active
 				if client_.name == "volar" then
 					client.stop()
 				end
