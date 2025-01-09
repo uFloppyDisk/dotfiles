@@ -1,0 +1,35 @@
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding = { x = 5, y = 1 }
+opacity = 0.8
+title = "Alacritty frfr"
+
+[font]
+size = 12
+normal = { family = "patched", style = "Regular" }
+bold = { family = "patched", style = "Bold" }
+italic = { family = "patched", style = "Italic" }
+bold_italic = { family = "patched", style = "Bold Italic" }
+
+[scrolling]
+history = 10000
+
+[terminal]
+shell = "/bin/zsh"
+
+[colors.primary]
+foreground = "#F2F2F2"
+background = "#2B0000"
+
+[mouse]
+bindings = [
+  { mouse = "Middle", action = "PasteSelection" }
+]
+
+[keyboard]
+bindings = [
+  { key = "V", mods = "Alt", action = "Paste" },
+  { key = "C", mods = "Alt", action = "Copy" },
+]
