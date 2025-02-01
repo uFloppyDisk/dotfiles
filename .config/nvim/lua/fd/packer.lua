@@ -73,4 +73,15 @@ return require('packer').startup(function(use)
 		  vim.cmd('colorscheme rose-pine')
 	  end
   })
+
+  use {
+	  'GustavEikaas/easy-dotnet.nvim',
+    requires = {
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope.nvim'},
+    },
+    config = function()
+      require("easy-dotnet").setup({})
+    end
+  }
 end)
