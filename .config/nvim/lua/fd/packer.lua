@@ -42,7 +42,24 @@ return require('packer').startup(function(use)
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
 
-  use { 
+  use({
+      "stevearc/conform.nvim",
+      config = function()
+          require("conform").setup({
+              formatters_by_ft = {
+                  lua = { "stylua" },
+                  rust = { "rustfmt", lsp_format = "fallback" },
+                  javascript = { "prettierd", "prettier", stop_after_first = true },
+              },
+              format_on_save = {
+                  timeout_ms = 500,
+                  lsp_format = "fallback",
+              },
+          })
+      end,
+  })
+
+  use {
     'folke/trouble.nvim',
     cmd = "Trouble",
     config = function ()
