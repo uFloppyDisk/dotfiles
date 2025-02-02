@@ -17,7 +17,3 @@
 
 [alias]
 	logd = log --decorate --oneline --graph
-
-[maintenance]
-	repo = /home/floppydisk/prog/upcrib-net
-
