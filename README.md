@@ -1,15 +1,21 @@
 # 💾 dotfiles
 
+### Prerequisites
 <details>
-    <summary>Prerequisites</summary>
+    <summary><b>GNU stow</b></summary>
 
-<ins>**GNU Stow**</ins>\
-**Debian/Ubuntu:** `sudo apt install stow`\
-**Arch Linux:** `sudo pacman -S stow`\
-**OSX:** `brew install stow`
+*Debian/Ubuntu:* `sudo apt install stow`\
+*Arch Linux:* `sudo pacman -S stow`\
+*OSX:* `brew install stow`
 
 </details>
 
+<details>
+    <summary><b>ripgrep</b></summary>
+
+[Install guide](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation)
+
+</details>
 
 ## Installation
 1. Install prerequisites
@@ -17,7 +23,10 @@
 3. Navigate to repo directory and stow it\
 `stow -R .`
 
+## Language support
+
 #### Dotnet
+Source: [Setup Roslyn with Mason](https://github.com/seblyng/roslyn.nvim?tab=readme-ov-file#-installation)
 <details>
     <summary>Latest LSP</summary>
 
@@ -34,5 +43,3 @@ You can then install it with `:MasonInstall roslyn` or through the popup menu by
   3. Check if it's working by running `dotnet Microsoft.CodeAnalysis.LanguageServer.dll --version` in the `roslyn` directory.
 
 </details>
-
-Source: [Setup Roslyn with Mason](https://github.com/seblyng/roslyn.nvim?tab=readme-ov-file#-installation)
