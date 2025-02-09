@@ -30,7 +30,7 @@ Source: [Setup Roslyn with Mason](https://github.com/seblyng/roslyn.nvim?tab=rea
 <details>
     <summary>Latest LSP</summary>
 
-You can then install it with `:MasonInstall roslyn` or through the popup menu by running `:Mason`. 
+Install `roslyn` using `:MasonInstall roslyn` or through the popup menu `:Mason`. 
 </details>
 <details>
   <summary>Compatibility <i>(older versions of .NET)</i></summary>
@@ -40,6 +40,6 @@ You can then install it with `:MasonInstall roslyn` or through the popup menu by
      - **Linux**: `~/.local/share/nvim/roslyn`
      - **Windows**: `%LOCALAPPDATA%\nvim-data\roslyn`
        > **_TIP:_** You can also specify a custom path to the roslyn folder in the setup function.
-  3. Check if it's working by running `dotnet Microsoft.CodeAnalysis.LanguageServer.dll --version` in the `roslyn` directory.
+  3. Check if it's working by running `dotnet Microsoft.CodeAnalysis.LanguageServer.dll --version` in the `roslyn` directory from **step 2**.
 
 </details>
