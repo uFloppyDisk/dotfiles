@@ -22,6 +22,18 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'williamboman/mason.nvim',
+        config = function()
+            require("mason").setup({
+                registries = {
+                    "github:mason-org/mason-registry",
+                    "github:Crashdummyy/mason-registry",
+                }
+            })
+        end
+    }
+
+    use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         requires = {
@@ -83,6 +95,13 @@ return require('packer').startup(function(use)
         },
         config = function()
             require("easy-dotnet").setup({})
+        end
+    }
+
+    use {
+        "seblyng/roslyn.nvim",
+        config = function()
+            require("roslyn").setup({})
         end
     }
 end)
