@@ -80,11 +80,8 @@ return require('packer').startup(function(use)
     }
 
     use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
     })
 
     use {
@@ -104,4 +101,12 @@ return require('packer').startup(function(use)
             require("roslyn").setup({})
         end
     }
+
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    })
 end)
