@@ -28,6 +28,11 @@ else
   bt="%{${(%):-"%K{red}"}%}"
 fi
 
+ssh_info=""
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  ssh_info="%B${fb}${bp}⧉ $(whoami) %b%{$reset_color%} "
+fi
+
 autoload -Uz vcs_info
 # enable VCS systems you use
 zstyle ':vcs_info:*' enable git svn
@@ -100,4 +105,4 @@ ZSH_THEME_VIRTUALENV_PREFIX=" with%F{red} "
 ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}"
 
 setopt prompt_subst
-PROMPT="${fp}%~%{$reset_color%}\$(virtualenv_prompt_info)\$(ruby_prompt_info)\$vcs_info_msg_0_${fp} 💾%#%{$reset_color%} "
+PROMPT="${ssh_info}${fp}%~%{$reset_color%}\$(virtualenv_prompt_info)\$(ruby_prompt_info)\$vcs_info_msg_0_${fp} 💾%#%{$reset_color%} "
