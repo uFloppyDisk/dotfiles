@@ -54,27 +54,7 @@ return require('packer').startup(function(use)
     use 'mbbill/undotree'
     use 'tpope/vim-fugitive'
 
-    use({
-        "stevearc/conform.nvim",
-        config = function()
-            require("conform").setup({
-                formatters_by_ft = {
-                    lua = { "stylua" },
-                    rust = { "rustfmt", lsp_format = "fallback" },
-                    javascript = { "prettierd", "prettier", stop_after_first = true },
-                },
-                format_on_save = function(bufnum)
-                    if vim.g.disable_autoformat or vim.b[bufnum].disable_autoformat then
-                        return
-                    end
-                    return {
-                        timeout_ms = 500,
-                        lsp_format = "fallback",
-                    }
-                end,
-            })
-        end,
-    })
+    use({ "stevearc/conform.nvim" })
 
     use {
         'folke/trouble.nvim',
