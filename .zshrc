@@ -82,6 +82,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export DOTNET_ROOT="/usr/lib/dotnet"
 export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
-if ! [ -x "$(command -v fastfetch >/dev/null 2>&1)" ]; then
+if [[ $TMUX == "" ]] && ! [ -x "$(command -v fastfetch >/dev/null 2>&1)" ]; then
   fastfetch
 fi
