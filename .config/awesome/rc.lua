@@ -55,7 +55,7 @@ local altkey                       = "Mod1"
 local modkey1                      = "Control"
 
 -- personal variables
-local terminal                     = "alacritty"
+local terminal                     = "gnome-terminal"
 local editor                       = os.getenv("EDITOR") or "nano"
 local editor_tui                   = terminal .. " -e " .. editor
 
@@ -309,7 +309,7 @@ globalkeys = my_table.join(
 
     -- Standard program
     awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
-        { description = "terminal with fish shell", group = "super" }),
+        { description = "terminal", group = "super" }),
     awful.key({ modkey }, "r", awesome.restart,
         { description = "reload awesome", group = "awesome" }),
     awful.key({ modkey, "Shift" }, "q",
