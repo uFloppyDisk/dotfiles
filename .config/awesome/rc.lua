@@ -18,6 +18,8 @@ local lain                           = require("lain")
 local freedesktop                    = require("freedesktop")
 local settings                       = require("settings")
 
+local local_bin                      = "~/.bin/"
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 local hotkeys_popup                  = require("awful.hotkeys_popup").widget
@@ -185,6 +187,10 @@ globalkeys = my_table.join(
 
     awful.key({ modkey, }, "s", hotkeys_popup.show_help,
         { description = "show help", group = "awesome" }),
+
+    awful.key({ modkey, }, "Escape",
+        function() awful.spawn.with_shell(local_bin .. 'lock.sh') end,
+        { description = "Lock", group = "awesome" }),
 
     -- Tag browsing with modkey
     awful.key({ modkey, }, "Left", awful.tag.viewprev,
