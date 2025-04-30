@@ -5,6 +5,7 @@ configuration {
  display-combi: "\/\/";
  combi-hide-mode-prefix: true;
  combi-modi: "window,drun,run";
+ window-format: "# {c} .{w}/ {t}";
 }
 
-@theme "paper-float"
+@theme "theme"
