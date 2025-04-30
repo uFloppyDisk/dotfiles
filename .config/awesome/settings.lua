@@ -33,7 +33,6 @@ settings.useFlameShot = true -- If you want flameshot (screenshotting tool) to a
 
 ---------- Get your local weather ID from https://openweathermap.org/ ----------
 
-settings.weatherID = 2643743 -- Set this to your own weather ID
+settings.weatherID = 6173331 -- Set this to your own weather ID
 
 return settings
-
