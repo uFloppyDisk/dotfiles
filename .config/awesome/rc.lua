@@ -67,8 +67,8 @@ awful.util.tagnames                = { " Main ", " Gaming ", " Music ", " Social
 awful.layout.suit.tile.left.mirror = true
 
 awful.layout.layouts               = {
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.floating,
