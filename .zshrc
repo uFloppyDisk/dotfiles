@@ -86,6 +86,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export DOTNET_ROOT="/usr/lib/dotnet"
 export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
+# SOPS
+export SOPS_AGE_KEY_FILE=$HOME/.sops/key.txt
+
 if [[ $TMUX == "" ]] && ! [ -x "$(command -v fastfetch >/dev/null 2>&1)" ]; then
   fastfetch
 fi
