@@ -403,7 +403,14 @@ globalkeys = my_table.join(
                 history_path = awful.util.get_cache_dir() .. "/history_eval"
             }
         end,
-        { description = "lua execute prompt", group = "awesome" }))
+        { description = "lua execute prompt", group = "awesome" }),
+
+    awful.key({}, "Print",
+        function()
+            awful.spawn.with_shell("flameshot gui")
+        end,
+        { description = "", group = "launcher" })
+)
 
 clientkeys = my_table.join(
     awful.key({ altkey, "Shift" }, "m", lain.util.magnify_client,
