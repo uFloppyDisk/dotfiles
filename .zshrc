@@ -86,6 +86,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export DOTNET_ROOT="/usr/lib/dotnet"
 export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
+# Golang
+export PATH="$PATH:/usr/local/go/bin"
+
 # SOPS
 export SOPS_AGE_KEY_FILE=$HOME/.sops/key.txt
 
