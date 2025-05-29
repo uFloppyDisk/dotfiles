@@ -95,3 +95,10 @@ export SOPS_AGE_KEY_FILE=$HOME/.sops/key.txt
 if [[ $TMUX == "" ]] && ! [ -x "$(command -v fastfetch >/dev/null 2>&1)" ]; then
   fastfetch
 fi
+
+# bun completions
+[ -s "/home/floppydisk/.bun/_bun" ] && source "/home/floppydisk/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
