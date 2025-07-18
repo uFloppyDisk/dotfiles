@@ -4,6 +4,10 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
 
+  imports = [
+    ./modules/hyprland.nix
+  ];
+
   # Localizations
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";

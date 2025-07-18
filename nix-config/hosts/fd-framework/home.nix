@@ -90,6 +90,7 @@
 
   imports = [
     inputs.zen-browser.homeModules.beta
+    ./hyprland.nix
   ];
 
   programs.zen-browser.enable = true;
