@@ -19,6 +19,10 @@
       modules = [
         ./configuration.nix
         ./hosts/fd-framework/configuration.nix
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
       ];
     };
   };
