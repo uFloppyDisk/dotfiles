@@ -101,7 +101,14 @@
   environment.shells = with pkgs; [ zsh ];
 
   users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    ohMyZsh = {
+      enable = true;
+      custom = "$HOME/.config/zsh/omz/custom";
+      theme = "fd";
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
