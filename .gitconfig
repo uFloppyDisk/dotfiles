@@ -7,12 +7,12 @@
 
 [credential "https://github.com"]
 	helper = 
-	helper = !/home/floppydisk/.nix-profile/bin/gh auth git-credential
+	helper = !/etc/profiles/per-user/floppydisk/bin/gh auth git-credential
 	helper = !/usr/bin/gh auth git-credential
 
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/home/floppydisk/.nix-profile/bin/gh auth git-credential
+	helper = !/etc/profiles/per-user/floppydisk/bin/gh auth git-credential
 
 [push]
   autoSetupRemote = true
