@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports =
@@ -80,16 +80,13 @@
     isNormalUser = true;
     description = "Pawel Bartusiak";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
 
   home-manager = {
   	extraSpecialArgs = { inherit inputs; };
-	users = {
-		"floppydisk" = import ./home.nix;
-	};
+    users = {
+      "floppydisk" = import ./home.nix;
+    };
   };
 
   # Install firefox.
@@ -100,7 +97,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; import ./packages.nix { inherit pkgs; };
+  environment.systemPackages = import ./packages.nix { inherit pkgs; };
   environment.shells = with pkgs; [ zsh ];
 
   users.defaultUserShell = pkgs.zsh;
