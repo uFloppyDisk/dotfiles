@@ -27,6 +27,7 @@
     nodejs_24
     rustup
     stow
+    ripgrep
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
