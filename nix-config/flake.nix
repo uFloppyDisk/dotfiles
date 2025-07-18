@@ -19,8 +19,6 @@
       modules = [
         ./configuration.nix
         ./hosts/fd-framework/configuration.nix
-        ./hosts/fd-framework/hardware-configuration.nix
-        inputs.home-manager.nixosModules.default
       ];
     };
   };
