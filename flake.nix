@@ -18,7 +18,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
-	./hardware-configuration.nix
+        ./hardware-configuration.nix
         inputs.home-manager.nixosModules.default
       ];
     };
