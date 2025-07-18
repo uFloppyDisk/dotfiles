@@ -48,7 +48,10 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+    options = "caps:ctrl_modifier";
   };
+
+  console.useXkbConfig = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
