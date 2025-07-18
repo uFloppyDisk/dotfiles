@@ -1,5 +1,5 @@
 {
-  description = "Flake for FD Laptop";
+  description = "FloppyFlake frfr";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
