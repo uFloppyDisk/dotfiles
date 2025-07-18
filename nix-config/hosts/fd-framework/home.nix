@@ -25,9 +25,10 @@
     localsend
     neovim
     nodejs_24
+    ripgrep
     rustup
     stow
-    ripgrep
+    youtube-music
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
