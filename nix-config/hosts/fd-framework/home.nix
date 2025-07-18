@@ -25,6 +25,7 @@
     localsend
     neovim
     nodejs_24
+    parsec-bin
     ripgrep
     rustup
     stow
