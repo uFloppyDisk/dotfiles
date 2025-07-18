@@ -17,8 +17,17 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.localsend
+  home.packages = with pkgs; [
+    btop
+    dotnet-sdk
+    fastfetch
+    gh
+    localsend
+    neovim
+    nodejs_24
+    rustup
+    stow
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
