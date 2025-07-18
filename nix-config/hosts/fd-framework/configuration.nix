@@ -10,8 +10,14 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   boot.initrd.luks.devices."luks-e6f28a04-2919-4bdf-bf22-a07e4b9245ba".device = "/dev/disk/by-uuid/e6f28a04-2919-4bdf-bf22-a07e4b9245ba";
+
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 28d";
+  };
+
   networking.hostName = "fd-framework"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
