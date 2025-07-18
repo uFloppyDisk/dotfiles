@@ -73,6 +73,7 @@
   };
 
   programs.firefox.enable = false;
+  fd.hyprland.enable = true;
 
   networking.firewall.allowedTCPPorts = [
     53317 # Localsend
