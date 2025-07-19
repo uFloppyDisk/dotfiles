@@ -191,19 +191,19 @@ in
       ];
 
       bindel = [
-        ",xf86audioraisevolume, exec, wpctl set-volume -l 1 @default_audio_sink@ 5%+"
-        ",xf86audiolowervolume, exec, wpctl set-volume @default_audio_sink@ 5%-"
-        ",xf86audiomute, exec, wpctl set-mute @default_audio_sink@ toggle"
-        ",xf86audiomicmute, exec, wpctl set-mute @default_audio_source@ toggle"
-        ",xf86monbrightnessup, exec, brightnessctl -e4 -n2 set 5%+"
-        ",xf86monbrightnessdown, exec, brightnessctl -e4 -n2 set 5%-"
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
+        ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
       ];
 
       bindl = [
-        ", xf86audionext, exec, playerctl next"
-        ", xf86audiopause, exec, playerctl play-pause"
-        ", xf86audioplay, exec, playerctl play-pause"
-        ", xf86audioprev, exec, playerctl previous"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
       ];
 
       windowrule = [
