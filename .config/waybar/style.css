@@ -20,13 +20,19 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-window#waybar.top label.module {
+window#waybar label.module {
   padding: 0 10px;
   color: @white;
   border: solid @red-500 1px;
+  border-bottom: solid transparent 0px;
 }
 
-button {
+window#waybar box#hardware label.module {
+  padding: 0px 4px;
+  border: solid transparent 1px;
+}
+
+window#waybar button {
   /* Use box-shadow instead of border so the text isn't offset */
   box-shadow: inset 0 -3px transparent;
   /* Avoid rounded borders under each button name */
