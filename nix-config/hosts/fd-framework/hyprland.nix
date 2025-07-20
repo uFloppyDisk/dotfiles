@@ -5,7 +5,7 @@ let
     swww-daemon &
     swww img ${./wallpaper.png} --resize=no &
 
-    hyprctl setcursor Adwaita 24 &
+    hyprctl setcursor Hackneyed 24 &
 
     nm-applet --indicator &
 

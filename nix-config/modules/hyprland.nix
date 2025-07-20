@@ -17,15 +17,16 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      kitty
-      waybar
-      libnotify
-      dunst
-      swww
-      rofi-wayland
-      pavucontrol
       copyq
+      dunst
+      hackneyed
       hyprshot
+      kitty
+      libnotify
+      pavucontrol
+      rofi-wayland
+      swww
+      waybar
       (pkgs.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         })
