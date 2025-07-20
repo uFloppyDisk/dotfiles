@@ -41,7 +41,7 @@ in
 
       general = {
           gaps_in = 10;
-          gaps_out = 10;
+          gaps_out = 20;
 
           border_size = 2;
 
@@ -197,10 +197,10 @@ in
         "$mainmod shift, l, movewindow, r"
         "$mainmod shift, k, movewindow, u"
         "$mainmod shift, j, movewindow, d"
-        "$mainmod alt, h, resizeactive, -5% 0"
-        "$mainmod alt, l, resizeactive, 5% 0"
-        "$mainmod alt, k, resizeactive, 0 -5%"
-        "$mainmod alt, j, resizeactive, 0 5%"
+        "$mainmod alt, h, resizeactive, -10% 0"
+        "$mainmod alt, l, resizeactive, 10% 0"
+        "$mainmod alt, k, resizeactive, 0 -10%"
+        "$mainmod alt, j, resizeactive, 0 10%"
 
         # Workspaces
         "$mainmod, 1, workspace, 1"
