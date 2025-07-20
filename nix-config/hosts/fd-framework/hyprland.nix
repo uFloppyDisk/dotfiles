@@ -11,7 +11,9 @@ let
 
     waybar &
 
-    dunst
+    dunst &
+
+    copyq --start-server
   '';
 in
 {
@@ -29,13 +31,16 @@ in
       "$filemanager" = "nautilus --new-window";
       "$menu" = "rofi -show";
 
+      "$hyprshot-conf" = "--freeze --output-folder ~/Pictures/Screenshots";
+      "$hyprshot-open" = "-- loupe";
+
       env = {
         xcursor_size = 24;
         hyprcursor_size = 24;
       };
 
       general = {
-          gaps_in = 5;
+          gaps_in = 10;
           gaps_out = 10;
 
           border_size = 2;
@@ -175,21 +180,29 @@ in
         "$mainmod, p, pseudo," # dwindle
         "$mainmod, u, togglesplit," # dwindle
 
+        # Utilities - Screenshots
+        ", PRINT, exec, hyprshot -m region $hyprshot-conf"
+        "shift, PRINT, exec, hyprshot -m window $hyprshot-conf"
+        "ctrl, PRINT, exec, hyprshot -m active $hyprshot-conf"
+        "alt, PRINT, exec, hyprshot -m region $hyprshot-conf $hyprshot-open"
+        "shift alt, PRINT, exec, hyprshot -m window $hyprshot-conf $hyprshot-open"
+        "ctrl alt, PRINT, exec, hyprshot -m active $hyprshot-conf $hyprshot-open"
+
+        # Window operations
         "$mainmod, h, movefocus, l"
         "$mainmod, l, movefocus, r"
         "$mainmod, k, movefocus, u"
         "$mainmod, j, movefocus, d"
-
         "$mainmod shift, h, movewindow, l"
         "$mainmod shift, l, movewindow, r"
         "$mainmod shift, k, movewindow, u"
         "$mainmod shift, j, movewindow, d"
-
         "$mainmod alt, h, resizeactive, -5% 0"
         "$mainmod alt, l, resizeactive, 5% 0"
         "$mainmod alt, k, resizeactive, 0 -5%"
         "$mainmod alt, j, resizeactive, 0 5%"
 
+        # Workspaces
         "$mainmod, 1, workspace, 1"
         "$mainmod, 2, workspace, 2"
         "$mainmod, 3, workspace, 3"

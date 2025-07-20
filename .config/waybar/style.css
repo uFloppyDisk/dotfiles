@@ -123,17 +123,13 @@ label:focus {
   background-color: @red-500;
 }
 
-#tray {
-  background-color: #2980b9;
-}
-
 #tray>.passive {
   -gtk-icon-effect: dim;
 }
 
 #tray>.needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: #eb4d4b;
+  background-color: @red-500;
 }
 
 #idle_inhibitor {
