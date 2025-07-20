@@ -24,6 +24,8 @@ in {
       swww
       rofi-wayland
       pavucontrol
+      copyq
+      hyprshot
       (pkgs.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         })
