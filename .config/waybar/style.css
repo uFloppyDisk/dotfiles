@@ -7,9 +7,11 @@
 }
 
 window#waybar {
-  background-color: rgba(43, 48, 59, 0.5);
-  border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-  color: #ffffff;
+  background-color: alpha(@red-500, 0.1);
+  color: @white;
+
+  border-bottom: solid @red-500 1px;
+
   transition-property: background-color;
   transition-duration: .5s;
 }
@@ -18,22 +20,10 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-window#waybar.termite {
-  background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-  background-color: #000000;
-  border: none;
+window#waybar.top label.module {
+  padding: 0 10px;
+  color: @white;
+  border: solid @red-500 1px;
 }
 
 button {
@@ -47,12 +37,7 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
   background: inherit;
-  box-shadow: inset 0 -3px #ffffff;
-}
-
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-  background-color: #a37800;
+  /* box-shadow: inset 0 -3px #ffffff; */
 }
 
 #workspaces button {
@@ -62,7 +47,7 @@ button:hover {
 }
 
 #workspaces button:hover {
-  background: rgba(0, 0, 0, 0.2);
+  background-color: @red-900;
 }
 
 #workspaces button.focused {
@@ -79,30 +64,13 @@ button:hover {
   box-shadow: inset 0 -3px #ffffff;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#power-profiles-daemon,
-#mpd {
-  padding: 0 10px;
-  color: #ffffff;
-}
-
 #window,
 #workspaces {
-  margin: 0 4px;
+  padding: 0 8px;
+}
+
+#window {
+  background-image: linear-gradient(to right, alpha(@red-500, 1) 0px, transparent 5px);
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -115,126 +83,44 @@ button:hover {
   margin-right: 0;
 }
 
-#clock {
-  background-color: #64727D;
-}
-
-#battery {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-#battery.charging,
-#battery.plugged {
-  color: #ffffff;
-  background-color: #26A65B;
-}
-
 @keyframes blink {
   to {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: @red-500;
   }
 }
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-  background-color: #f53c3c;
-  color: #ffffff;
+  /* background-color: @red-600; */
   animation-name: blink;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   animation-timing-function: steps(12);
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
 #power-profiles-daemon {
-  padding-right: 15px;
+  padding-right: 20px;
 }
 
 #power-profiles-daemon.performance {
-  background-color: #f53c3c;
-  color: #ffffff;
+  background-color: @red-500;
 }
 
 #power-profiles-daemon.balanced {
-  background-color: #2980b9;
-  color: #ffffff;
+  background-color: @red-700;
 }
 
 #power-profiles-daemon.power-saver {
-  background-color: #2ecc71;
-  color: #000000;
+  background-color: @red-800;
 }
 
 label:focus {
-  background-color: #000000;
-}
-
-#cpu {
-  background-color: #2ecc71;
-  color: #000000;
-}
-
-#memory {
-  background-color: #9b59b6;
-}
-
-#disk {
-  background-color: #964B00;
-}
-
-#backlight {
-  background-color: #90b1b1;
-}
-
-#network {
-  background-color: #2980b9;
-}
-
-#network.disconnected {
-  background-color: #f53c3c;
-}
-
-#pulseaudio {
-  background-color: #f1c40f;
-  color: #000000;
-}
-
-#pulseaudio.muted {
-  background-color: #90b1b1;
-  color: #2a5c45;
-}
-
-#wireplumber {
-  background-color: #fff0f5;
-  color: #000000;
-}
-
-#wireplumber.muted {
-  background-color: #f53c3c;
-}
-
-#custom-media {
-  background-color: #66cc99;
-  color: #2a5c45;
-  min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-  background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-  background-color: #ffa000;
-}
-
-#temperature {
-  background-color: #f0932b;
+  background-color: @red-700;
 }
 
 #temperature.critical {
-  background-color: #eb4d4b;
+  background-color: @red-500;
 }
 
 #tray {
@@ -251,12 +137,11 @@ label:focus {
 }
 
 #idle_inhibitor {
-  background-color: #2d3436;
+  padding-right: 15px;
 }
 
 #idle_inhibitor.activated {
-  background-color: #ecf0f1;
-  color: #2d3436;
+  background-color: @red-600;
 }
 
 #mpd {
