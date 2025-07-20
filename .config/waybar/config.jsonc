@@ -18,15 +18,26 @@
         "pulseaudio",
         "network",
         "power-profiles-daemon",
-        "cpu",
-        "memory",
-        "temperature",
-        "backlight",
-        "battery",
+        "group/hardware",
         "tray",
         "clock",
         "custom/power",
     ],
+    "group/hardware": {
+        "orientation": "inherit",
+        "drawer": {
+          "transition-duration": 500,
+          "children-class": "not-hardware",
+          "translation-left-to-right": false,
+        },
+        "modules": [
+          "battery",
+          "cpu",
+          "memory",
+          "disk",
+          "temperature",
+        ],
+    },
     "hyprland/window": {
         "format": "{}",
         "rewrite": {
@@ -143,7 +154,7 @@
         "tooltip": false
     },
     "memory": {
-        "format": "  {}%"
+        "format": "  {}%"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -152,6 +163,15 @@
         // "format-critical": "{icon} {temperatureC}°C ",
         "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", ""]
+    },
+    "disk": {
+        "format": "  {used}",
+        "format-warning": "  {used}",
+        "format-critical": "  {free} free",
+        "states": {
+          "warning": 85,
+          "critical": 95,
+        },
     },
     "backlight": {
         // "device": "acpi_video1",
