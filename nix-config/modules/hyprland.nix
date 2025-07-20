@@ -23,6 +23,7 @@ in {
       dunst
       swww
       rofi-wayland
+      pavucontrol
       (pkgs.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         })
