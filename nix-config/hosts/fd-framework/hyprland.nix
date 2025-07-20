@@ -5,6 +5,8 @@ let
     swww-daemon &
     swww img ${./wallpaper.png} --resize=no &
 
+    hyprctl setcursor Adwaita 24 &
+
     nm-applet --indicator &
 
     waybar &
@@ -24,8 +26,8 @@ in
       ];
 
       "$terminal" = "kitty";
-      "$filemanager" = "dolphin";
-      "$menu" = "wofi --show drun";
+      "$filemanager" = "nautilus --new-window";
+      "$menu" = "rofi -show";
 
       env = {
         xcursor_size = 24;
@@ -34,16 +36,17 @@ in
 
       general = {
           gaps_in = 5;
-          gaps_out = 20;
+          gaps_out = 10;
 
           border_size = 2;
 
           # https://wiki.hyprland.org/configuring/variables/#variable-types for info about colors
-          col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          col.inactive_border = "rgba(595959aa)";
+          col.active_border = "rgba(251,44,54,1)";
+          col.inactive_border = "rgba(70,8,9,1)";
 
           # set to true enable resizing windows by clicking and dragging on borders and gaps
-          resize_on_border = false;
+          resize_on_border = true;
+          hover_icon_on_border = true;
 
           # please see https://wiki.hyprland.org/configuring/tearing/ before you turn this on
           allow_tearing = false;
@@ -52,25 +55,27 @@ in
       };
 
       decoration = {
-          rounding = 10;
+          rounding = 0;
           rounding_power = 2;
 
           # change transparency of focused and unfocused windows;
           active_opacity = 1.0;
-          inactive_opacity = 1.0;
+          inactive_opacity = 0.9;
 
-          shadow = {
-              enabled = true;
-              range = 4;
-              render_power = 3;
-              color = "rgba(1a1a1aee)";
-          };
+          new_optimizations = true;
+
+          # shadow = {
+          #     enabled = true;
+          #     range = 4;
+          #     render_power = 3;
+          #     color = "rgba(1a1a1aee)";
+          # };
 
           # https://wiki.hyprland.org/configuring/variables/#blur;
           blur = {
               enabled = true;
-              size = 3;
-              passes = 1;
+              size = 5;
+              passes = 2;
 
               vibrancy = 0.1696;
           };
@@ -118,8 +123,12 @@ in
       };
 
       misc = {
-          force_default_wallpaper = -1; # set to 0 or 1 to disable the anime mascot wallpapers
-          disable_hyprland_logo = false; # if true disables the random hyprland logo / anime girl background. :(
+          force_default_wallpaper = 0; # set to 0 or 1 to disable the anime mascot wallpapers
+          disable_hyprland_logo = true; # if true disables the random hyprland logo / anime girl background. :(
+          disable_splash_rendering = true;
+          animate_manual_resizes = true;
+          vfr = true;
+          vrr = 2;
       };
 
       input = {
@@ -135,6 +144,10 @@ in
 
           touchpad = {
               natural_scroll = false;
+              disable_while_typing = true;
+              tap-to-click = true;
+              drag_lock = true;
+              scroll_factor = 0.5;
           };
       };
 
@@ -150,19 +163,33 @@ in
       "$mainmod" = "super"; # sets "windows" key as main modifier
 
       bind = [
-        "$mainmod, space, exec, rofi -show"
-        "$mainmod, q, exec, $terminal"
-        "$mainmod, c, killactive,"
-        "$mainmod, m, exit,"
+        "$mainmod, space, exec, $menu"
+        "$mainmod, t, exec, $terminal"
         "$mainmod, e, exec, $filemanager"
-        "$mainmod, v, togglefloating,"
-        "$mainmod, r, exec, $menu"
+
+        "$mainmod, q, killactive,"
+        "$mainmod shift, q, exit,"
+
+        "$mainmod, f, togglefloating,"
+        "$mainmod, m, fullscreen, 1"
         "$mainmod, p, pseudo," # dwindle
-        "$mainmod, j, togglesplit," # dwindle
-        "$mainmod, left, movefocus, l"
-        "$mainmod, right, movefocus, r"
-        "$mainmod, up, movefocus, u"
-        "$mainmod, down, movefocus, d"
+        "$mainmod, u, togglesplit," # dwindle
+
+        "$mainmod, h, movefocus, l"
+        "$mainmod, l, movefocus, r"
+        "$mainmod, k, movefocus, u"
+        "$mainmod, j, movefocus, d"
+
+        "$mainmod shift, h, movewindow, l"
+        "$mainmod shift, l, movewindow, r"
+        "$mainmod shift, k, movewindow, u"
+        "$mainmod shift, j, movewindow, d"
+
+        "$mainmod alt, h, resizeactive, -5% 0"
+        "$mainmod alt, l, resizeactive, 5% 0"
+        "$mainmod alt, k, resizeactive, 0 -5%"
+        "$mainmod alt, j, resizeactive, 0 5%"
+
         "$mainmod, 1, workspace, 1"
         "$mainmod, 2, workspace, 2"
         "$mainmod, 3, workspace, 3"
@@ -213,6 +240,8 @@ in
       windowrule = [
         "suppressevent maximize, class:.*;"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0;"
+        "opacity 1.0, zen-beta"
+        "opacity 1.0, zen"
       ];
 
       exec-once = ''${startScript}/bin/start'';
