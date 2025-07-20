@@ -17,7 +17,11 @@ in
     enable = true;
 
     settings = {
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        "eDP-1, preferred, auto, auto"
+        "DP-4, preferred, auto-left, auto"
+        ", preferred, auto, 1"
+      ];
 
       "$terminal" = "kitty";
       "$filemanager" = "dolphin";
