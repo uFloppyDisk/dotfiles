@@ -213,3 +213,26 @@ label:focus {
 #privacy-item.audio-out {
   background-color: #0069d4;
 }
+
+#backlight-slider slider {
+  min-height: 4px;
+  min-width: 4px;
+  opacity: 1;
+  background-image: radial-gradient(circle at center, @red-500);
+  border-radius: 100%;
+  border: none;
+  box-shadow: none;
+}
+
+#backlight-slider trough {
+  min-height: 5px;
+  min-width: 80px;
+  border: solid @red-500 1px;
+  background-color: @red-950;
+}
+
+#backlight-slider highlight {
+  min-width: 0px;
+  border: solid @red-500 1px;
+  background-color: @red-500;
+}
