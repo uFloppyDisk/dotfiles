@@ -27,6 +27,7 @@ in {
       rofi-wayland
       swww
       waybar
+      networkmanagerapplet
       (pkgs.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         })
