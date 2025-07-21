@@ -169,7 +169,7 @@ in
 
       bind = [
         "$mainmod, space, exec, $menu"
-        "$mainmod, t, exec, $terminal"
+        "$mainmod, return, exec, $terminal"
         "$mainmod, e, exec, $filemanager"
 
         "$mainmod, q, killactive,"
