@@ -10,6 +10,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    security.pam.services.hyprlock = {};
+
     programs.hyprland = {
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       enable = true;
