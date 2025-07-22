@@ -22,6 +22,81 @@ let
   '';
 in
 {
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        disable_loading_bar = true;
+        grace = 3;
+        hide_cursor = true;
+        no_fade_in = false;
+      };
+
+      auth = {
+        fingerprint.enabled = true;
+      };
+
+      background = [
+        {
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+
+      label = [
+        {
+          color = "rgb(193, 0, 7)";
+          font_family = "monospace";
+          font_size = 12;
+
+          position = "0, 150";
+
+          text = ''<span allow_breaks="true">8888888888888      .d88888b. 8888888b. 8888888b.Y88b   d88P .d88888b.  .d8888b.  <br/>888       888     d88P" "Y88b888   Y88b888   Y88bY88b d88P d88P" "Y88bd88P  Y88b <br/>888       888     888     888888    888888    888 Y88o88P  888     888Y88b.      <br/>8888888   888     888     888888   d88P888   d88P  Y888P   888     888 "Y888b.   <br/>888       888     888     8888888888P" 8888888P"    888    888     888    "Y88b. <br/>888       888     888     888888       888          888    888     888      "888 <br/>888       888     Y88b. .d88P888       888          888    Y88b. .d88PY88b  d88P <br/>888       88888888 "Y88888P" 888       888          888     "Y88888P"  "Y8888P"  <br/>FloppyOS version 37.1111_1101</span>'';
+        }
+      ];
+
+      shape = [
+        {
+          size = "100%, 200";
+          position = "0, 150";
+          rounding = 0;
+
+          color = "rgba(70, 8, 9, 0.5)";
+
+          border_size = 1;
+          border_color = "rgb(193, 0, 7)";
+
+          zindex = -1;
+        }
+      ];
+
+      input-field = [
+        {
+          size = "200, 50";
+          position = "0, 0";
+          rounding = 0;
+          monitor = "";
+          dots_center = true;
+          dots_text_format = "*";
+          fade_on_empty = false;
+
+          font_family = "monospace";
+
+          font_color = "rgb(193, 0, 7)";
+          inner_color = "rgb(70, 8, 9)";
+          outer_color = "rgb(193, 0, 7)";
+          check_color = "rgb(193, 0, 7)";
+          fail_color = "rgb(193, 0, 7)";
+
+          outline_thickness = 1;
+          placeholder_text = ''Enter Passphrase'';
+          shadow_passes = 2;
+        }
+      ];
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -35,6 +110,7 @@ in
       "$terminal" = "kitty";
       "$filemanager" = "nautilus --new-window";
       "$menu" = "rofi -show";
+      "$lock" = "hyprlock";
 
       "$hyprshot-conf" = "--freeze --output-folder ~/Pictures/Screenshots";
       "$hyprshot-open" = "-- loupe";
@@ -174,6 +250,7 @@ in
 
       bind = [
         "$mainmod, space, exec, $menu"
+        "$mainmod, escape, exec, $lock"
         "$mainmod, return, exec, $terminal"
         "$mainmod, e, exec, $filemanager"
 
