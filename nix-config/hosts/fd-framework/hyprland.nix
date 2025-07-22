@@ -43,11 +43,11 @@ in
           gaps_in = 10;
           gaps_out = 20;
 
-          border_size = 2;
+          border_size = 1;
 
           # https://wiki.hyprland.org/configuring/variables/#variable-types for info about colors
-          col.active_border = "rgba(251,44,54,1)";
-          col.inactive_border = "rgba(70,8,9,1)";
+          col.active_border = "rgba(dc2626dd) rgba(dc2626dd) 45deg";
+          col.inactive_border = "rgba(450a0aff)";
 
           # set to true enable resizing windows by clicking and dragging on borders and gaps
           resize_on_border = true;
@@ -253,8 +253,8 @@ in
       windowrule = [
         "suppressevent maximize, class:.*;"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0;"
-        "opacity 1.0, zen-beta"
-        "opacity 1.0, zen"
+        "opacity 1.0,class:zen.*,title:.*YouTube.*"
+        "bordercolor rgba(b91c1cff),class:.*"
       ];
 
       exec-once = ''${startScript}/bin/start'';
