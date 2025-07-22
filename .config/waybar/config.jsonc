@@ -49,12 +49,12 @@
     "hyprland/workspaces": {
         "format": "{icon}",
         "format-icons": {
-            "urgent": "",
-            "active": "",
-            "default": ""
+            "urgent": "󱈸",
+            "active": "󰝤",
+            "default": "󰝣"
         },
         "persistent-workspaces": {
-            "Virtual-1": [1, 2, 3, 4, 5]
+            "*": [1, 2, 3, 4, 5]
         }
     },
     // Modules configuration
