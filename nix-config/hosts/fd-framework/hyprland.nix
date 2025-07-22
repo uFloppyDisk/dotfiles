@@ -62,7 +62,7 @@ in
           position = "0, 150";
           rounding = 0;
 
-          color = "rgba(70, 8, 9, 0.5)";
+          color = "rgba(70, 8, 9, 0.7)";
 
           border_size = 1;
           border_color = "rgb(193, 0, 7)";
