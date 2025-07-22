@@ -115,10 +115,10 @@ in
       "$hyprshot-conf" = "--freeze --output-folder ~/Pictures/Screenshots";
       "$hyprshot-open" = "-- loupe";
 
-      env = {
-        xcursor_size = 24;
-        hyprcursor_size = 24;
-      };
+      env = [
+        "XCURSOR_SIZE=24"
+        "HYPRCURSOR_SIZE=24"
+      ];
 
       general = {
           gaps_in = 10;
@@ -127,8 +127,8 @@ in
           border_size = 1;
 
           # https://wiki.hyprland.org/configuring/variables/#variable-types for info about colors
-          col.active_border = "rgba(dc2626dd) rgba(dc2626dd) 45deg";
-          col.inactive_border = "rgba(450a0aff)";
+          "col.active_border" = "rgba(dc2626dd) rgba(dc2626dd) 45deg";
+          "col.inactive_border" = "rgba(450a0aff)";
 
           # set to true enable resizing windows by clicking and dragging on borders and gaps
           resize_on_border = true;
@@ -147,8 +147,6 @@ in
           # change transparency of focused and unfocused windows;
           active_opacity = 1.0;
           inactive_opacity = 0.9;
-
-          new_optimizations = true;
 
           # shadow = {
           #     enabled = true;
@@ -183,19 +181,19 @@ in
             "global, 1, 10, default"
             "border, 1, 5.39, easeoutquint"
             "windows, 1, 4.79, easeoutquint"
-            "windowsin, 1, 4.1, easeoutquint, popin 87%"
-            "windowsout, 1, 1.49, linear, popin 87%"
-            "fadein, 1, 1.73, almostlinear"
-            "fadeout, 1, 1.46, almostlinear"
+            "windowsIn, 1, 4.1, easeoutquint, popin 87%"
+            "windowsOut, 1, 1.49, linear, popin 87%"
+            "fadeIn, 1, 1.73, almostlinear"
+            "fadeOut, 1, 1.46, almostlinear"
             "fade, 1, 3.03, quick"
             "layers, 1, 3.81, easeoutquint"
-            "layersin, 1, 4, easeoutquint, fade"
-            "layersout, 1, 1.5, linear, fade"
-            "fadelayersin, 1, 1.79, almostlinear"
-            "fadelayersout, 1, 1.39, almostlinear"
+            "layersIn, 1, 4, easeoutquint, fade"
+            "layersOut, 1, 1.5, linear, fade"
+            "fadeLayersIn, 1, 1.79, almostlinear"
+            "fadeLayersOut, 1, 1.39, almostlinear"
             "workspaces, 1, 1.94, almostlinear, fade"
-            "workspacesin, 1, 1.21, almostlinear, fade"
-            "workspacesout, 1, 1.94, almostlinear, fade"
+            "workspacesIn, 1, 1.21, almostlinear, fade"
+            "workspacesOut, 1, 1.94, almostlinear, fade"
           ];
       };
 
@@ -336,7 +334,6 @@ in
         "suppressevent maximize, class:.*;"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0;"
         "opacity 1.0,class:zen.*,title:.*YouTube.*"
-        "bordercolor rgba(b91c1cff),class:.*"
       ];
 
       exec-once = ''${startScript}/bin/start'';
