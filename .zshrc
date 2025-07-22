@@ -78,7 +78,10 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew_bin="/home/linuxbrew/.linuxbrew/bin/brew"
+if [[ -f $brew_bin ]]; then
+  eval "$($brew_bin shellenv)"
+fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
