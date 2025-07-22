@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix-shell
+#! nix-shell -i bash
+#! nix-shell -p inotify-tools
 
 CONFIG_DIR="$HOME/dotfiles/.config/waybar"
 WAYBAR_PID=""
