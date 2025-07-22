@@ -1,9 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
+  shuffleWallpaper = pkgs.pkgs.writeShellScriptBin "shufflewallpaper" ''
+    swww img --resize=crop \
+    "$(find ${config.home.homeDirectory}/Pictures/Wallpapers -type f | shuf -n 1 | xargs)"
+  '';
+
   startScript = pkgs.pkgs.writeShellScriptBin "start" ''
     swww-daemon &
-    swww img ${./wallpaper.png} --resize=no &
+    ${shuffleWallpaper}/bin/shufflewallpaper &
 
     hyprctl setcursor Hackneyed 24 &
 
