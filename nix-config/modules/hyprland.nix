@@ -30,6 +30,8 @@ in {
       swww
       waybar
       networkmanagerapplet
+      brightnessctl
+      playerctl
       (pkgs.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         })
