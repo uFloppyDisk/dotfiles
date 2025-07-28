@@ -23,6 +23,7 @@
     fastfetch
     gh
     localsend
+    lutris
     neovim
     nodejs_24
     parsec-bin

@@ -11,6 +11,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-e6f28a04-2919-4bdf-bf22-a07e4b9245ba".device = "/dev/disk/by-uuid/e6f28a04-2919-4bdf-bf22-a07e4b9245ba";
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
+  hardware.graphics.enable32Bit = true;
+  hardware.graphics.extraPackages = with pkgs; [
+    amdvlk
+  ];
+  hardware.graphics.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
 
   nix.gc = {
     automatic = true;
@@ -57,6 +66,13 @@
   };
 
   console.useXkbConfig = true;
+
+  environment.systemPackages = with pkgs; [ 
+    protonup-qt
+    wineWowPackages.stable
+    wineWowPackages.waylandFull
+    winetricks
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.floppydisk = {
