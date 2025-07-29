@@ -32,6 +32,13 @@
     stow
     youtube-music
 
+    # K8s & Containerization tools
+    docker
+    k9s
+    kubectl
+    minikube
+    skaffold
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
