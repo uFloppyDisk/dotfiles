@@ -33,7 +33,7 @@
     youtube-music
 
     # K8s & Containerization tools
-    docker
+    docker-client
     k9s
     kubectl
     minikube

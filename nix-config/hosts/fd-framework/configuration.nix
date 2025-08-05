@@ -87,17 +87,13 @@
 
   virtualisation.docker = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.floppydisk = {
     isNormalUser = true;
     description = "Pawel Bartusiak";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   home-manager = {
