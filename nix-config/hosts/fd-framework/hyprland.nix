@@ -6,6 +6,11 @@ let
     "$(find ${config.home.homeDirectory}/Pictures/Wallpapers -type f | shuf -n 1 | xargs)"
   '';
 
+  generateLockAscii-src = builtins.readFile ./scripts/generateLockAscii.sh;
+  generateLockAscii = (pkgs.pkgs.writeShellScriptBin "generateLockAscii" generateLockAscii-src).overrideAttrs(old: {
+    buildCommand = "${old.buildCommand}\n patchShebangs $out";
+  });
+
   startScript = pkgs.pkgs.writeShellScriptBin "start" ''
     swww-daemon &
     ${shuffleWallpaper}/bin/shufflewallpaper &
@@ -52,7 +57,7 @@ in
 
           position = "0, 150";
 
-          text = ''<span allow_breaks="true">8888888888888      .d88888b. 8888888b. 8888888b.Y88b   d88P .d88888b.  .d8888b.  <br/>888       888     d88P" "Y88b888   Y88b888   Y88bY88b d88P d88P" "Y88bd88P  Y88b <br/>888       888     888     888888    888888    888 Y88o88P  888     888Y88b.      <br/>8888888   888     888     888888   d88P888   d88P  Y888P   888     888 "Y888b.   <br/>888       888     888     8888888888P" 8888888P"    888    888     888    "Y88b. <br/>888       888     888     888888       888          888    888     888      "888 <br/>888       888     Y88b. .d88P888       888          888    Y88b. .d88PY88b  d88P <br/>888       88888888 "Y88888P" 888       888          888     "Y88888P"  "Y8888P"  <br/>FloppyOS version 37.1111_1101</span>'';
+          text = ''cmd[once] ${generateLockAscii}/bin/generateLockAscii'';
         }
       ];
 

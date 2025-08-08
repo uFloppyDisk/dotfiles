@@ -19,19 +19,20 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
+      brightnessctl
       copyq
       dunst
+      figlet
       hackneyed
       hyprshot
       kitty
       libnotify
+      networkmanagerapplet
       pavucontrol
+      playerctl
       rofi-wayland
       swww
       waybar
-      networkmanagerapplet
-      brightnessctl
-      playerctl
       (pkgs.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
         })
