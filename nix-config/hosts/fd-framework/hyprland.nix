@@ -108,7 +108,7 @@ in
     settings = {
       monitor = [
         "eDP-1, preferred, auto, auto"
-        "DP-4, preferred, auto-left, auto"
+        "DP-3, preferred, auto-left, auto"
         ", preferred, auto, 1"
       ];
 
