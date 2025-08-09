@@ -22,6 +22,7 @@
     dotnet-sdk
     fastfetch
     gh
+    gnupg
     localsend
     lutris
     neovim
