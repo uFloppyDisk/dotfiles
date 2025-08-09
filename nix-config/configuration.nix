@@ -14,6 +14,25 @@
 
   services.printing.enable = true;
 
+  # Certificates
+  security.pki.certificates = [
+    # FloppyCert
+    ''
+      -----BEGIN CERTIFICATE-----
+      MIIB0TCCAXagAwIBAgIQArJAp5OmpOrVlHPQ80xY/TAKBggqhkjOPQQDAjAyMRMw
+      EQYDVQQKEwpGbG9wcHlDZXJ0MRswGQYDVQQDExJGbG9wcHlDZXJ0IFJvb3QgQ0Ew
+      HhcNMjUwNTA2MDAxMjQ1WhcNMzUwNTA0MDAxMjQ1WjA6MRMwEQYDVQQKEwpGbG9w
+      cHlDZXJ0MSMwIQYDVQQDExpGbG9wcHlDZXJ0IEludGVybWVkaWF0ZSBDQTBZMBMG
+      ByqGSM49AgEGCCqGSM49AwEHA0IABPoxB+lrC6UCmYKWUK23ktaaYDy7PocTD4bg
+      GJltXCNONoAMVMrf1Z43K6ZGgBj1bRqkXV8xYxAUPi+NTCcmU8qjZjBkMA4GA1Ud
+      DwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQWBBRdNLIeEqV6
+      Q0p+i0sSa8qX+845NzAfBgNVHSMEGDAWgBTwWmooBdl3eKfEUVsPFDHiQ98Z7TAK
+      BggqhkjOPQQDAgNJADBGAiEA3+nuyOJsd2FIhEsP8MxDax4ixgwBmu9AXgAhPI5o
+      BeQCIQDJdeQLzMxRwx6wIEOaAN1gMrxRLbgaoujpNNmFQdGxcg==
+      -----END CERTIFICATE-----
+    ''
+  ];
+
   # Audio
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
