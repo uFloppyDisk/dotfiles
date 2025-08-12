@@ -25,6 +25,7 @@ in {
       figlet
       hackneyed
       hyprshot
+      jq
       kitty
       libnotify
       networkmanagerapplet

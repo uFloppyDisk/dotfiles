@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
+function read_nixos_version () {
+  local current_generation=$(nixos-rebuild list-generations --json | jq '. - map(select(.current != true)) | .[]')
+  eval $(echo "$current_generation" | jq -r 'to_entries[] | "export \(.key)=\(.value | @sh)"')
+}
+
+read_nixos_version
+
 LARGE="FLOPPYOS"
-EXTRA="FloppyOS version 37.1111_1101"
+printf -v EXTRA "FloppyOS version %d (%s)" $generation $nixosVersion
 
 RANDOM_SEED=$$$(date +%s)
 FONT_POOL=(
