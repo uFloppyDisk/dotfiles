@@ -41,6 +41,7 @@
     minikube
     skaffold
 
+    # Games
     prismlauncher
 
     # # Adds the 'hello' command to your environment. It prints a friendly

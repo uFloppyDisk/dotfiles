@@ -112,6 +112,8 @@
   programs.firefox.enable = false;
   fd.hyprland.enable = true;
 
+  programs.steam.enable = true;
+
   networking.firewall.allowedTCPPorts = [
     53317 # Localsend
   ];
