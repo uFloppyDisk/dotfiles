@@ -32,6 +32,7 @@
     ripgrep
     rustup
     stow
+    unzip
     youtube-music
 
     # K8s & Containerization tools
