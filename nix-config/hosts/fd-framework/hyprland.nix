@@ -233,7 +233,7 @@ in
 
           touchpad = {
               natural_scroll = false;
-              disable_while_typing = true;
+              disable_while_typing = false;
               tap-to-click = true;
               drag_lock = true;
               scroll_factor = 0.5;
