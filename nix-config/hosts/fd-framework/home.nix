@@ -28,6 +28,7 @@
     lutris
     neovim
     nodejs_24
+    obsidian
     parsec-bin
     ripgrep
     rustup
