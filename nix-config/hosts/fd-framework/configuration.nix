@@ -59,6 +59,8 @@
     };
   };
 
+  hardware.rtl-sdr.enable = true;
+
   # Configure fingerprint service
   systemd.services.fprintd = {
     wantedBy = [ "multi-user.target" ];
@@ -99,7 +101,7 @@
   users.users.floppydisk = {
     isNormalUser = true;
     description = "Pawel Bartusiak";
-    extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" "plugdev" ];
   };
 
   home-manager = {
