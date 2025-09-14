@@ -36,6 +36,9 @@
     unzip
     youtube-music
 
+    # Hobbies
+    sdrpp
+
     # K8s & Containerization tools
     docker-client
     k9s
