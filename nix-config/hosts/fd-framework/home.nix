@@ -24,16 +24,18 @@
     fastfetch
     gh
     gnupg
-    localsend
-    lutris
     neovim
     nodejs_24
-    obsidian
-    parsec-bin
     ripgrep
     rustup
     stow
     unzip
+
+    # Productivity & Utility Apps
+    localsend
+    lutris
+    obsidian
+    parsec-bin
     youtube-music
 
     # Hobbies
