@@ -32,6 +32,7 @@
     unzip
 
     # Productivity & Utility Apps
+    discord
     localsend
     lutris
     obsidian
