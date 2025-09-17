@@ -33,6 +33,7 @@
 
     # Productivity & Utility Apps
     discord
+    libreoffice-qt6-fresh
     localsend
     lutris
     obsidian
