@@ -44,6 +44,7 @@
   };
 
   programs.firefox.enable = lib.mkDefault true;
+  programs.nix-ld.enable = true;
 
   environment.systemPackages = import ./packages.nix { inherit pkgs; };
   environment.shells = with pkgs; [ zsh ];
