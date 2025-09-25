@@ -32,6 +32,7 @@
     unzip
 
     # Productivity & Utility Apps
+    blender
     discord
     libreoffice-qt6-fresh
     localsend
