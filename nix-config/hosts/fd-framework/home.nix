@@ -20,7 +20,6 @@
   home.packages = with pkgs; [
     bitwarden-desktop
     btop
-    dotnet-sdk
     fastfetch
     gh
     gnupg
@@ -50,6 +49,9 @@
     kubectl
     minikube
     skaffold
+
+    # .NET
+    dotnet-sdk_9
 
     # Games
     prismlauncher
