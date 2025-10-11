@@ -27,6 +27,7 @@ in {
       hyprshot
       jq
       kitty
+      kooha
       libnotify
       networkmanagerapplet
       pavucontrol
