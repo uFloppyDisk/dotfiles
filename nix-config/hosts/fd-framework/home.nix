@@ -33,6 +33,7 @@
     # Productivity & Utility Apps
     blender
     discord
+    graphicsmagick
     libreoffice-qt6-fresh
     localsend
     lutris
