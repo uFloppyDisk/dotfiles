@@ -61,7 +61,6 @@ prompt_context() {
 
 # if [ "$TMUX" = "" ]; then tmux; fi
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -69,6 +68,10 @@ export NVM_DIR="$HOME/.nvm"
 # XDG
 # Include user desktop files
 export XDG_DATA_DIRS="$HOME/.local/share/applications:$XDG_DATA_DIRS"
+
+# npm global packages
+export PATH=~/.npm-packages/bin:$PATH
+export NODE_PATH=~/.npm-packages/lib/node_modules
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
