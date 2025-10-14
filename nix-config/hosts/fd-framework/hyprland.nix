@@ -11,6 +11,24 @@ let
     buildCommand = "${old.buildCommand}\n patchShebangs $out";
   });
 
+  mon-mirror = pkgs.pkgs.writeShellScriptBin "mon-mirror" ''
+    if [ -z "$1" ]; then
+      hyprctl monitors | grep -A1 "^Monitor"
+      exit
+    fi
+
+    targetMonitor="$1"
+    sourceMonitorOrDefault="$2"
+
+    if [ -z "$sourceMonitorOrDefault" ]; then
+      hyprctl keyword monitor $targetMonitor,preferred,auto,auto
+    elif [ "$sourceMonitorOrDefault" = "y" ]; then
+      hyprctl keyword monitor $targetMonitor,preferred,auto,auto,mirror,eDP-1
+    else
+      hyprctl keyword monitor $targetMonitor,preferred,auto,auto,mirror,$sourceMonitorOrDefault
+    fi
+  '';
+
   startScript = pkgs.pkgs.writeShellScriptBin "start" ''
     swww-daemon &
     ${shuffleWallpaper}/bin/shufflewallpaper &
@@ -27,6 +45,10 @@ let
   '';
 in
 {
+  home.packages = [
+    mon-mirror
+  ];
+
   programs.hyprlock = {
     enable = true;
     settings = {
