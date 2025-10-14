@@ -51,8 +51,9 @@
     minikube
     skaffold
 
-    # .NET
+    # Langs & SDKs
     dotnet-sdk_9
+    go
 
     # Games
     prismlauncher
