@@ -18,6 +18,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    bc
     bitwarden-desktop
     btop
     fastfetch
@@ -82,7 +83,7 @@
     ".oh-my-zsh/oh-my-zsh.sh".text = ''
       #!/usr/bin/env bash
     '';
-    
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
