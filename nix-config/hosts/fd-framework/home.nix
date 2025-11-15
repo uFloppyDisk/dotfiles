@@ -34,6 +34,7 @@
     # Productivity & Utility Apps
     blender
     discord
+    gpick
     graphicsmagick
     libreoffice-qt6-fresh
     localsend
@@ -116,10 +117,7 @@
     # EDITOR = "emacs";
   };
 
-  imports = [
-    inputs.zen-browser.homeModules.beta
-    ./hyprland.nix
-  ];
+  imports = [ inputs.zen-browser.homeModules.beta ./hyprland.nix ];
 
   programs.zen-browser.enable = true;
 
