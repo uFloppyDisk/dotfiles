@@ -127,6 +127,11 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 
+    extraConfig = ''
+      # Source the auto-generated monitors configuration
+      source = ~/.config/hypr/monitors.conf
+    '';
+
     settings = {
       monitor = [
         "eDP-1, preferred, auto, auto"

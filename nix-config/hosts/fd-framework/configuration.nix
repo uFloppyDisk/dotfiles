@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, system, ... }:
 
 {
   imports =
@@ -105,10 +105,8 @@
   };
 
   home-manager = {
-  	extraSpecialArgs = { inherit inputs; };
-    users = {
-      "floppydisk" = import ./home.nix;
-    };
+    extraSpecialArgs = { inherit inputs system; };
+    users = { "floppydisk" = import ./home.nix; };
   };
 
   programs.firefox.enable = false;

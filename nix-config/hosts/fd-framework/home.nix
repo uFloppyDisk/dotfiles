@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, system, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -24,6 +24,7 @@
     fastfetch
     gh
     gnupg
+    inputs.hyprdynamicmonitors.packages.${system}.default
     neovim
     nodejs_24
     ripgrep
@@ -117,7 +118,20 @@
     # EDITOR = "emacs";
   };
 
-  imports = [ inputs.zen-browser.homeModules.beta ./hyprland.nix ];
+  imports = [
+    inputs.hyprdynamicmonitors.homeManagerModules.default
+    inputs.zen-browser.homeModules.beta
+    ./hyprland.nix
+  ];
+
+  home.hyprdynamicmonitors = {
+    enable = true;
+    config = ''
+      [general]
+      destination = "$HOME/.config/hypr/monitors.conf"
+      debounce_time_ms = 1500
+    '';
+  };
 
   programs.zen-browser.enable = true;
 

@@ -18,21 +18,25 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprdynamicmonitors.url = "github:fiffeek/hyprdynamicmonitors";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    # use "nixos", or your hostname as the name of the configuration
-    # it's a better practice than "default" shown in the video
-    nixosConfigurations.fd-framework = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./configuration.nix
-        ./hosts/fd-framework/configuration.nix
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
+  outputs = { self, nixpkgs, ... }@inputs:
+    let system = "x86_64-linux";
+    in {
+      # use "nixos", or your hostname as the name of the configuration
+      # it's a better practice than "default" shown in the video
+      nixosConfigurations.fd-framework = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs system; };
+        modules = [
+          ./configuration.nix
+          ./hosts/fd-framework/configuration.nix
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ];
+      };
     };
-  };
 }
