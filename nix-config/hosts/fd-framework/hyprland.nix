@@ -154,7 +154,7 @@ in
 
       general = {
           gaps_in = 10;
-          gaps_out = 20;
+          gaps_out = "15,10";
 
           border_size = 1;
 
