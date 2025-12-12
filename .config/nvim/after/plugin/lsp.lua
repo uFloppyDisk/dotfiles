@@ -15,16 +15,6 @@ require('mason-lspconfig').setup({
 
       })
     end,
-    volar = function()
-      require('lspconfig').volar.setup({
-        filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'vue'},
-        init_options = {
-          vue = {
-            hybridMode = false,
-          }
-        }
-      })
-    end,
   },
 })
 
