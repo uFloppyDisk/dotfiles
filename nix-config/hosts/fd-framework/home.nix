@@ -124,14 +124,7 @@
     ./hyprland.nix
   ];
 
-  home.hyprdynamicmonitors = {
-    enable = true;
-    config = ''
-      [general]
-      destination = "$HOME/.config/hypr/monitors.conf"
-      debounce_time_ms = 1500
-    '';
-  };
+  home.hyprdynamicmonitors = { enable = true; };
 
   programs.zen-browser.enable = true;
 
