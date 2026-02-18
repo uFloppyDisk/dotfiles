@@ -101,7 +101,8 @@
   users.users.floppydisk = {
     isNormalUser = true;
     description = "Pawel Bartusiak";
-    extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" "plugdev" ];
+    extraGroups =
+      [ "audio" "docker" "networkmanager" "plugdev" "vboxusers" "wheel" ];
   };
 
   home-manager = {
