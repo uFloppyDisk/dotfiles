@@ -1,12 +1,10 @@
 { pkgs, lib, ... }:
 
 {
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  imports = [
-    ./modules/hyprland.nix
-  ];
+  imports = [ ./modules/hyprland.nix ];
 
   # Localizations
   time.timeZone = "America/Vancouver";
@@ -49,9 +47,7 @@
   environment.systemPackages = import ./packages.nix { inherit pkgs; };
   environment.shells = with pkgs; [ zsh ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {

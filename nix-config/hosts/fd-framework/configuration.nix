@@ -1,26 +1,22 @@
 { pkgs, inputs, system, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-e6f28a04-2919-4bdf-bf22-a07e4b9245ba".device = "/dev/disk/by-uuid/e6f28a04-2919-4bdf-bf22-a07e4b9245ba";
+  boot.initrd.luks.devices."luks-e6f28a04-2919-4bdf-bf22-a07e4b9245ba".device =
+    "/dev/disk/by-uuid/e6f28a04-2919-4bdf-bf22-a07e4b9245ba";
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.blacklistedKernelModules = [ "kvm-amd" ];
 
   hardware.graphics.enable32Bit = true;
-  hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
-  ];
-  hardware.graphics.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
+  hardware.graphics.extraPackages = with pkgs; [ amdvlk ];
+  hardware.graphics.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
 
   nix.gc = {
     automatic = true;
@@ -29,7 +25,8 @@
   };
 
   networking.hostName = "fd-framework"; # Define your hostname.
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable =
+    false; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -37,7 +34,7 @@
 
   # Enable networking
   networking.networkmanager = {
-  	enable = true;
+    enable = true;
     wifi.powersave = false;
   };
 
@@ -81,16 +78,14 @@
 
   console.useXkbConfig = true;
 
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     protonup-qt
     wineWowPackages.stable
     wineWowPackages.waylandFull
     winetricks
   ];
 
-  virtualisation.docker = {
-    enable = true;
-  };
+  virtualisation.docker = { enable = true; };
 
   virtualisation.virtualbox.host = {
     enable = true;
