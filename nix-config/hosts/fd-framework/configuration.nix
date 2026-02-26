@@ -103,6 +103,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs system; };
     users = { "floppydisk" = import ./home.nix; };
+    backupFileExtension = "bak";
   };
 
   programs.firefox.enable = false;

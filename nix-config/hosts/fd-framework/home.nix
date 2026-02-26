@@ -124,7 +124,10 @@
     ./hyprland.nix
   ];
 
-  home.hyprdynamicmonitors = { enable = true; };
+  home.hyprdynamicmonitors = {
+    enable = true;
+    configFile = "${./config/hyprdynamicmonitors/config.toml}";
+  };
 
   programs.zen-browser.enable = true;
 

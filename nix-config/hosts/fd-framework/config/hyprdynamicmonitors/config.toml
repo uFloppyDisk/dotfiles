@@ -1,0 +1,32 @@
+[general]
+destination = "$HOME/.config/hypr/monitors.conf"
+debounce_time_ms = 1500
+
+
+[profiles.home-office]
+config_file = "/home/floppydisk/.config/hyprdynamicmonitors/hyprconfigs/home-office.go.tmpl"
+config_file_type = "template"
+[profiles.home-office.conditions]
+
+[[profiles.home-office.conditions.required_monitors]]
+description = "BOE 0x0BC9"
+monitor_tag = "monitor0"
+
+[[profiles.home-office.conditions.required_monitors]]
+description = "GIGA-BYTE TECHNOLOGY CO. LTD. AORUS FI27Q-P 19380B002847"
+monitor_tag = "monitor1"
+
+
+[profiles.bedroom]
+config_file = "/home/floppydisk/.config/hyprdynamicmonitors/hyprconfigs/bedroom.go.tmpl"
+config_file_type = "template"
+[profiles.bedroom.conditions]
+
+[[profiles.bedroom.conditions.required_monitors]]
+description = "BOE 0x0BC9"
+monitor_tag = "monitor0"
+
+[[profiles.bedroom.conditions.required_monitors]]
+description = "BNQ BenQ GW2480 ET5CP01643SL0"
+monitor_tag = "monitor1"
+
