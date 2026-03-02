@@ -12,7 +12,6 @@
   boot.initrd.luks.devices."luks-e6f28a04-2919-4bdf-bf22-a07e4b9245ba".device =
     "/dev/disk/by-uuid/e6f28a04-2919-4bdf-bf22-a07e4b9245ba";
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.blacklistedKernelModules = [ "kvm-amd" ];
 
   hardware.graphics.enable32Bit = true;
   hardware.graphics.extraPackages = with pkgs; [ amdvlk ];
@@ -92,12 +91,22 @@
     enableExtensionPack = true;
   };
 
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.floppydisk = {
     isNormalUser = true;
     description = "Pawel Bartusiak";
-    extraGroups =
-      [ "audio" "docker" "networkmanager" "plugdev" "vboxusers" "wheel" ];
+    extraGroups = [
+      "audio"
+      "docker"
+      "libvirtd"
+      "networkmanager"
+      "plugdev"
+      "vboxusers"
+      "wheel"
+    ];
   };
 
   home-manager = {
