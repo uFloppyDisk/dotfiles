@@ -6,5 +6,8 @@ require("telescope").setup({
 		find_files = {
 			hidden = true, -- show dotfiles and hidden directories
 		},
+		live_grep = {
+			hidden = true, -- show dotfiles and hidden directories
+		},
 	},
 })
