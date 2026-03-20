@@ -32,6 +32,9 @@
     stow
     unzip
 
+    # Neovim utils
+    tree-sitter
+
     # Productivity & Utility Apps
     blender
     discord

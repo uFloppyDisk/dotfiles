@@ -1,7 +1,10 @@
 { pkgs, lib, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   imports = [ ./modules/hyprland.nix ];
@@ -52,6 +55,9 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
+    shellAliases = {
+      tree-sitter-cli = "tree-sitter";
+    };
     ohMyZsh = {
       enable = true;
       custom = "$HOME/.config/zsh/omz/custom";

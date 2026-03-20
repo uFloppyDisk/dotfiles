@@ -1,31 +1,52 @@
+local on_attach = function(_, bufnr)
+	local opts = { buffer = bufnr, remap = false }
+
+	vim.keymap.set("n", "gd", function()
+		vim.lsp.buf.definition()
+	end, opts)
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover()
+	end, opts)
+	vim.keymap.set("n", "<leader>vws", function()
+		vim.lsp.buf.workspace_symbol()
+	end, opts)
+	vim.keymap.set("n", "<leader>vd", function()
+		vim.diagnostic.open_float()
+	end, opts)
+	vim.keymap.set("n", "<leader>vca", function()
+		vim.lsp.buf.code_action()
+	end, opts)
+	vim.keymap.set("n", "<leader>vrr", function()
+		vim.lsp.buf.references()
+	end, opts)
+	vim.keymap.set("n", "<leader>vrn", function()
+		vim.lsp.buf.rename()
+	end, opts)
+	vim.keymap.set("i", "<C-h>", function()
+		vim.lsp.buf.signature_help()
+	end, opts)
+end
+
 return {
-	"VonHeikemen/lsp-zero.nvim",
-	branch = "v3.x",
+	"neovim/nvim-lspconfig",
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
 		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-nvim-lsp",
 		"L3MON4D3/LuaSnip",
 	},
 	config = function()
-		local lsp = require("lsp-zero")
+		local cmp = require("cmp")
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local luasnip = require("luasnip")
 
-		lsp.preset("recommended")
+		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		require("mason").setup({})
-		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"eslint",
-				"ts_ls",
-			},
-			handlers = {
-				lsp.default_setup,
-				ts_ls = function()
-					require("lspconfig").ts_ls.setup({})
-				end,
-			},
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(event)
+				on_attach("", event.buf)
+			end,
 		})
 
 		local vue_language_server_path = vim.fn.stdpath("data")
@@ -37,6 +58,8 @@ return {
 			configNamespace = "typescript",
 		}
 		local vtsls_config = {
+			capabilities = capabilities,
+			on_attach = on_attach,
 			settings = {
 				vtsls = {
 					tsserver = {
@@ -48,20 +71,22 @@ return {
 			},
 			filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 		}
-		local vue_ls_config = {}
+		local vue_ls_config = {
+			capabilities = capabilities,
+			on_attach = on_attach,
+		}
 
 		vim.lsp.config("vtsls", vtsls_config)
 		vim.lsp.config("vue_ls", vue_ls_config)
 		vim.lsp.enable({ "vtsls", "vue_ls" })
 
-		local cmp = require("cmp")
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
-		local cmp_mappings = lsp.defaults.cmp_mappings({
+		local cmp_mappings = {
 			["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 			["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
 			["<C-y>"] = cmp.mapping.confirm({ select = true }),
 			["<C-Space>"] = cmp.mapping.complete(),
-		})
+		}
 
 		cmp_mappings["<Tab>"] = nil
 		cmp_mappings["<S-Tab>"] = nil
@@ -71,55 +96,27 @@ return {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
+			snippet = {
+				expand = function(args)
+					luasnip.lsp_expand(args.body)
+				end,
+			},
 			mapping = cmp_mappings,
-		})
-
-		lsp.set_preferences({
-			suggest_lsp_servers = false,
-			sign_icons = {
-				error = "E",
-				warn = "W",
-				hint = "H",
-				info = "I",
+			sources = {
+				{ name = "nvim_lsp" },
 			},
 		})
 
-		lsp.on_attach(function(client, bufnr)
-			local opts = { buffer = bufnr, remap = false }
-
-			vim.keymap.set("n", "gd", function()
-				vim.lsp.buf.definition()
-			end, opts)
-			vim.keymap.set("n", "K", function()
-				vim.lsp.buf.hover()
-			end, opts)
-			vim.keymap.set("n", "<leader>vws", function()
-				vim.lsp.buf.workspace_symbol()
-			end, opts)
-			vim.keymap.set("n", "<leader>vd", function()
-				vim.diagnostic.open_float()
-			end, opts)
-			vim.keymap.set("n", "[d", function()
-				vim.diagnostic.goto_next()
-			end, opts)
-			vim.keymap.set("n", "]d", function()
-				vim.diagnostic.goto_prev()
-			end, opts)
-			vim.keymap.set("n", "<leader>vca", function()
-				vim.lsp.buf.code_action()
-			end, opts)
-			vim.keymap.set("n", "<leader>vrr", function()
-				vim.lsp.buf.references()
-			end, opts)
-			vim.keymap.set("n", "<leader>vrn", function()
-				vim.lsp.buf.rename()
-			end, opts)
-			vim.keymap.set("i", "<C-h>", function()
-				vim.lsp.buf.signature_help()
-			end, opts)
-		end)
-
-		lsp.setup()
+		local signs = {
+			Error = "E",
+			Warn = "W",
+			Hint = "H",
+			Info = "I",
+		}
+		for type, icon in pairs(signs) do
+			local hl = "DiagnosticSign" .. type
+			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		end
 
 		vim.diagnostic.config({
 			virtual_text = true,
@@ -143,7 +140,7 @@ return {
 					return
 				end
 
-				if client.name == "volar" then
+				if client.name == "vue_ls" then
 					for _, client_ in pairs(active_clients) do
 						if client_.name == "ts_ls" then
 							client_.stop()
@@ -151,7 +148,7 @@ return {
 					end
 				elseif client.name == "ts_ls" then
 					for _, client_ in pairs(active_clients) do
-						if client_.name == "volar" then
+						if client_.name == "vue_ls" then
 							client.stop()
 						end
 					end

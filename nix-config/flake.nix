@@ -22,14 +22,22 @@
     hyprdynamicmonitors.url = "github:fiffeek/hyprdynamicmonitors";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-    let system = "x86_64-linux";
-    in {
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    let
+      system = "x86_64-linux";
+    in
+    {
       # use "nixos", or your hostname as the name of the configuration
       # it's a better practice than "default" shown in the video
       nixosConfigurations.fd-framework = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs system; };
         modules = [
+          {
+            nixpkgs.overlays = [
+              (import ./hosts/fd-framework/overlays.nix)
+            ];
+          }
           ./configuration.nix
           ./hosts/fd-framework/configuration.nix
           {
