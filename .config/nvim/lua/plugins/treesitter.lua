@@ -2,11 +2,11 @@ vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/site/")
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-	tag = "v0.10.0",
+	branch = "master",
 	lazy = false,
 	build = ":TSUpdate",
 	config = function()
-		require("nvim-treesitter").setup({
+		require("nvim-treesitter.configs").setup({
 			ensure_installed = { "javascript", "typescript", "python", "c", "lua", "vim", "vimdoc", "query" },
 			sync_install = false,
 			auto_install = true,
