@@ -1,22 +1,25 @@
 { pkgs, config, ... }:
 
 let
+  _changeWallpaper = pkgs.pkgs.writeShellScriptBin "_changewp" ''
+    swww img --resize=crop "$1"
+  '';
+
+  _wallpaperLocation = config.home.homeDirectory + "/Pictures/Wallpapers/";
+
   shuffleWallpaper = pkgs.pkgs.writeShellScriptBin "shufflewallpaper" ''
-    swww img --resize=crop \
-    "$(find ${config.home.homeDirectory}/Pictures/Wallpapers -type f | shuf -n 1 | xargs)"
+    ${_changeWallpaper}/bin/_changewp "$(find ${_wallpaperLocation} -type f | shuf -n 1 | xargs)"
   '';
 
   pickWallpaper = pkgs.pkgs.writeShellScriptBin "pickwallpaper" ''
-    wpLoc="${config.home.homeDirectory}/Pictures/Wallpapers/"
     if [ -z "$1" ]; then
-      find $wpLoc -type f
+      find ${_wallpaperLocation} -type f
       exit
     fi
 
     targetWp="$1"
 
-    swww img --resize=crop \
-    "$wpLoc$targetWp"
+    ${_changeWallpaper}/bin/_changewp "${_wallpaperLocation}$targetWp"
   '';
 
   generateLockAscii-src = builtins.readFile ./scripts/generateLockAscii.sh;
