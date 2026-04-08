@@ -47,6 +47,7 @@ in
 {
   home.packages = [
     mon-mirror
+    shuffleWallpaper
   ];
 
   programs.hyprlock = {
