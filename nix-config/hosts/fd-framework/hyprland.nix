@@ -11,16 +11,47 @@ let
     ${_changeWallpaper}/bin/_changewp "$(find ${_wallpaperLocation} -type f | shuf -n 1 | xargs)"
   '';
 
-  pickWallpaper = pkgs.pkgs.writeShellScriptBin "pickwallpaper" ''
-    if [ -z "$1" ]; then
-      find ${_wallpaperLocation} -type f
-      exit
-    fi
+  pickWallpaper = pkgs.stdenv.mkDerivation {
+    name = "pickwallpaper";
+    
+    # We are generating the script on the fly, so no source needed
+    unpackPhase = "true";
+    
+    nativeBuildInputs = [ pkgs.installShellFiles ];
 
-    targetWp="$1"
+    installPhase = ''
+      mkdir -p $out/bin
+      
+      # Write the script
+      cat <<EOF > $out/bin/pickwallpaper
+      #!/usr/bin/env bash
+      if [ -z "\$1" ]; then
+        # List only the filenames (not absolute paths) for easier selection
+        find ${_wallpaperLocation} -maxdepth 1 -type f -printf "%f\n"
+        exit
+      fi
 
-    ${_changeWallpaper}/bin/_changewp "${_wallpaperLocation}$targetWp"
-  '';
+      targetWp="\$1"
+      ${_changeWallpaper}/bin/_changewp "${_wallpaperLocation}\$targetWp"
+      EOF
+      
+      chmod +x $out/bin/pickwallpaper
+
+      # Generate and install the Bash completion
+      installShellCompletion --cmd pickwallpaper \
+      --zsh <(cat <<EOF
+          #compdef pickwallpaper
+          _pickwallpaper() {
+            local -a wallpapers
+            # Generate list of files from the wallpaper directory
+            wallpapers=(\$(ls -1 "${_wallpaperLocation}" 2>/dev/null))
+            _describe 'wallpapers' wallpapers
+          }
+          _pickwallpaper "\$@"
+      EOF
+      )
+    '';
+  };
 
   generateLockAscii-src = builtins.readFile ./scripts/generateLockAscii.sh;
   generateLockAscii = (pkgs.pkgs.writeShellScriptBin "generateLockAscii" generateLockAscii-src).overrideAttrs(old: {
