@@ -6,6 +6,19 @@ let
     "$(find ${config.home.homeDirectory}/Pictures/Wallpapers -type f | shuf -n 1 | xargs)"
   '';
 
+  pickWallpaper = pkgs.pkgs.writeShellScriptBin "pickwallpaper" ''
+    wpLoc="${config.home.homeDirectory}/Pictures/Wallpapers/"
+    if [ -z "$1" ]; then
+      find $wpLoc -type f
+      exit
+    fi
+
+    targetWp="$1"
+
+    swww img --resize=crop \
+    "$wpLoc$targetWp"
+  '';
+
   generateLockAscii-src = builtins.readFile ./scripts/generateLockAscii.sh;
   generateLockAscii = (pkgs.pkgs.writeShellScriptBin "generateLockAscii" generateLockAscii-src).overrideAttrs(old: {
     buildCommand = "${old.buildCommand}\n patchShebangs $out";
@@ -48,6 +61,7 @@ in
   home.packages = [
     mon-mirror
     shuffleWallpaper
+    pickWallpaper
   ];
 
   programs.hyprlock = {
