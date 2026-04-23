@@ -57,9 +57,54 @@ return {
 			languages = { "vue" },
 			configNamespace = "typescript",
 		}
+
+		local vtsls_ignored_codes = {
+			[2306] = true,
+			[2339] = true,
+			[6133] = true,
+			[6192] = true,
+			[80001] = true,
+			[80006] = true,
+		}
 		local vtsls_config = {
 			capabilities = capabilities,
-			on_attach = on_attach,
+			on_attach = function(content, bufnr)
+				on_attach(content, bufnr)
+				-- Define common ESLint config files
+				local eslint_configs = {
+					".eslintrc",
+					".eslintrc.js",
+					".eslintrc.cjs",
+					".eslintrc.yaml",
+					".eslintrc.yml",
+					".eslintrc.json",
+					"eslint.config.js",
+					"eslint.config.mjs",
+					"eslint.config.cjs",
+					"eslint.config.ts",
+				}
+
+				-- Check if any ESLint config exists in the project
+				local file_path = vim.api.nvim_buf_get_name(bufnr)
+				local has_eslint = vim.fs.find(eslint_configs, {
+					path = file_path,
+					upward = true,
+					stop = vim.loop.os_homedir(), -- Stop at home directory for safety
+				})[1] ~= nil
+
+				-- If ESLint is found, disable vtsls diagnostics for this buffer
+				if has_eslint then
+					local original_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
+					-- vim.diagnostic.enable(false, { bufnr = bufnr })
+					vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+						if result.diagnostics then
+							result.diagnostics = vim.tbl_filter(function(d)
+								return not vtsls_ignored_codes[d.code]
+							end, result.diagnostics)
+						end
+					end
+				end
+			end,
 			settings = {
 				vtsls = {
 					tsserver = {
