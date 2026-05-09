@@ -53,6 +53,11 @@
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   users.defaultUserShell = pkgs.zsh;
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
   programs.zsh = {
     enable = true;
     shellAliases = {
