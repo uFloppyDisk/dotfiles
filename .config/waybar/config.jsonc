@@ -265,7 +265,7 @@
         "menu-actions": {
             "shutdown": "shutdown now",
             "reboot": "reboot",
-            "suspend": "systemctl suspend",
+            "suspend": "(hyprlock --immediate & ) && systemctl suspend",
             "hibernate": "systemctl hibernate",
             "lock": "hyprlock --immediate &",
         }
