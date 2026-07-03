@@ -1,4 +1,9 @@
-{ pkgs, inputs, system, ... }:
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -26,9 +31,7 @@
     gnupg
     inputs.hyprdynamicmonitors.packages.${system}.default
     neovim
-    nodejs_24
     ripgrep
-    rustup
     stow
     unzip
 
@@ -60,6 +63,9 @@
     # Langs & SDKs
     dotnet-sdk_9
     go
+    nodejs_24
+    pnpm
+    rustup
 
     # Games
     prismlauncher
