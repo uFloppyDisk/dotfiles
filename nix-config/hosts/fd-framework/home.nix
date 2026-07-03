@@ -48,6 +48,7 @@
     lutris
     obsidian
     parsec-bin
+    vlc
     youtube-music
 
     # Hobbies
