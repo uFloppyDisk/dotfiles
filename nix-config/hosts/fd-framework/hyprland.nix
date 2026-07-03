@@ -13,15 +13,15 @@ let
 
   pickWallpaper = pkgs.stdenv.mkDerivation {
     name = "pickwallpaper";
-    
+
     # We are generating the script on the fly, so no source needed
     unpackPhase = "true";
-    
+
     nativeBuildInputs = [ pkgs.installShellFiles ];
 
     installPhase = ''
       mkdir -p $out/bin
-      
+
       # Write the script
       cat <<EOF > $out/bin/pickwallpaper
       #!/usr/bin/env bash
@@ -34,7 +34,7 @@ let
       targetWp="\$1"
       ${_changeWallpaper}/bin/_changewp "${_wallpaperLocation}\$targetWp"
       EOF
-      
+
       chmod +x $out/bin/pickwallpaper
 
       # Generate and install the Bash completion
@@ -54,9 +54,11 @@ let
   };
 
   generateLockAscii-src = builtins.readFile ./scripts/generateLockAscii.sh;
-  generateLockAscii = (pkgs.pkgs.writeShellScriptBin "generateLockAscii" generateLockAscii-src).overrideAttrs(old: {
-    buildCommand = "${old.buildCommand}\n patchShebangs $out";
-  });
+  generateLockAscii =
+    (pkgs.pkgs.writeShellScriptBin "generateLockAscii" generateLockAscii-src).overrideAttrs
+      (old: {
+        buildCommand = "${old.buildCommand}\n patchShebangs $out";
+      });
 
   mon-mirror = pkgs.pkgs.writeShellScriptBin "mon-mirror" ''
     if [ -z "$1" ]; then
@@ -128,7 +130,7 @@ in
 
           position = "0, 150";
 
-          text = ''cmd[once] ${generateLockAscii}/bin/generateLockAscii'';
+          text = "cmd[once] ${generateLockAscii}/bin/generateLockAscii";
         }
       ];
 
@@ -166,7 +168,7 @@ in
           fail_color = "rgb(193, 0, 7)";
 
           outline_thickness = 1;
-          placeholder_text = ''Enter Passphrase'';
+          placeholder_text = "Enter Passphrase";
           shadow_passes = 2;
         }
       ];
@@ -202,127 +204,127 @@ in
       ];
 
       general = {
-          gaps_in = 10;
-          gaps_out = "15,10";
+        gaps_in = 10;
+        gaps_out = "15,10";
 
-          border_size = 1;
+        border_size = 1;
 
-          # https://wiki.hyprland.org/configuring/variables/#variable-types for info about colors
-          "col.active_border" = "rgba(dc2626dd) rgba(dc2626dd) 45deg";
-          "col.inactive_border" = "rgba(450a0aff)";
+        # https://wiki.hyprland.org/configuring/variables/#variable-types for info about colors
+        "col.active_border" = "rgba(dc2626dd) rgba(dc2626dd) 45deg";
+        "col.inactive_border" = "rgba(450a0aff)";
 
-          # set to true enable resizing windows by clicking and dragging on borders and gaps
-          resize_on_border = true;
-          hover_icon_on_border = true;
+        # set to true enable resizing windows by clicking and dragging on borders and gaps
+        resize_on_border = true;
+        hover_icon_on_border = true;
 
-          # please see https://wiki.hyprland.org/configuring/tearing/ before you turn this on
-          allow_tearing = false;
+        # please see https://wiki.hyprland.org/configuring/tearing/ before you turn this on
+        allow_tearing = false;
 
-          layout = "dwindle";
+        layout = "dwindle";
       };
 
       decoration = {
-          rounding = 0;
-          rounding_power = 2;
+        rounding = 0;
+        rounding_power = 2;
 
-          # change transparency of focused and unfocused windows;
-          active_opacity = 1.0;
-          inactive_opacity = 0.9;
+        # change transparency of focused and unfocused windows;
+        active_opacity = 1.0;
+        inactive_opacity = 0.9;
 
-          # shadow = {
-          #     enabled = true;
-          #     range = 4;
-          #     render_power = 3;
-          #     color = "rgba(1a1a1aee)";
-          # };
+        # shadow = {
+        #     enabled = true;
+        #     range = 4;
+        #     render_power = 3;
+        #     color = "rgba(1a1a1aee)";
+        # };
 
-          # https://wiki.hyprland.org/configuring/variables/#blur;
-          blur = {
-              enabled = true;
-              size = 5;
-              passes = 2;
+        # https://wiki.hyprland.org/configuring/variables/#blur;
+        blur = {
+          enabled = true;
+          size = 5;
+          passes = 2;
 
-              vibrancy = 0.1696;
-          };
+          vibrancy = 0.1696;
+        };
       };
 
       animations = {
-          enabled = "yes, please :)";
+        enabled = "yes, please :)";
 
-          # default animations, see https://wiki.hyprland.org/configuring/animations/ for more;
-          bezier = [
-            "easeoutquint,0.23,1,0.32,1"
-            "easeinoutcubic,0.65,0.05,0.36,1"
-            "linear,0,0,1,1"
-            "almostlinear,0.5,0.5,0.75,1.0"
-            "quick,0.15,0,0.1,1"
-          ];
+        # default animations, see https://wiki.hyprland.org/configuring/animations/ for more;
+        bezier = [
+          "easeoutquint,0.23,1,0.32,1"
+          "easeinoutcubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostlinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
 
-          animation = [
-            "global, 1, 10, default"
-            "border, 1, 5.39, easeoutquint"
-            "windows, 1, 4.79, easeoutquint"
-            "windowsIn, 1, 4.1, easeoutquint, popin 87%"
-            "windowsOut, 1, 1.49, linear, popin 87%"
-            "fadeIn, 1, 1.73, almostlinear"
-            "fadeOut, 1, 1.46, almostlinear"
-            "fade, 1, 3.03, quick"
-            "layers, 1, 3.81, easeoutquint"
-            "layersIn, 1, 4, easeoutquint, fade"
-            "layersOut, 1, 1.5, linear, fade"
-            "fadeLayersIn, 1, 1.79, almostlinear"
-            "fadeLayersOut, 1, 1.39, almostlinear"
-            "workspaces, 1, 1.94, almostlinear, fade"
-            "workspacesIn, 1, 1.21, almostlinear, fade"
-            "workspacesOut, 1, 1.94, almostlinear, fade"
-          ];
+        animation = [
+          "global, 1, 10, default"
+          "border, 1, 5.39, easeoutquint"
+          "windows, 1, 4.79, easeoutquint"
+          "windowsIn, 1, 4.1, easeoutquint, popin 87%"
+          "windowsOut, 1, 1.49, linear, popin 87%"
+          "fadeIn, 1, 1.73, almostlinear"
+          "fadeOut, 1, 1.46, almostlinear"
+          "fade, 1, 3.03, quick"
+          "layers, 1, 3.81, easeoutquint"
+          "layersIn, 1, 4, easeoutquint, fade"
+          "layersOut, 1, 1.5, linear, fade"
+          "fadeLayersIn, 1, 1.79, almostlinear"
+          "fadeLayersOut, 1, 1.39, almostlinear"
+          "workspaces, 1, 1.94, almostlinear, fade"
+          "workspacesIn, 1, 1.21, almostlinear, fade"
+          "workspacesOut, 1, 1.94, almostlinear, fade"
+        ];
       };
 
       dwindle = {
-          pseudotile = true; # master switch for pseudotiling. enabling is bound to mainmod + p in the keybinds section below
-          preserve_split = true; # you probably want this
+        pseudotile = true; # master switch for pseudotiling. enabling is bound to mainmod + p in the keybinds section below
+        preserve_split = true; # you probably want this
       };
 
       master = {
-          new_status = "master";
+        new_status = "master";
       };
 
       misc = {
-          force_default_wallpaper = 0; # set to 0 or 1 to disable the anime mascot wallpapers
-          disable_hyprland_logo = true; # if true disables the random hyprland logo / anime girl background. :(
-          disable_splash_rendering = true;
-          animate_manual_resizes = true;
-          vfr = true;
-          vrr = 2;
+        force_default_wallpaper = 0; # set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo = true; # if true disables the random hyprland logo / anime girl background. :(
+        disable_splash_rendering = true;
+        animate_manual_resizes = true;
+        vfr = true;
+        vrr = 2;
       };
 
       input = {
-          kb_layout = "us";
-          kb_variant = "";
-          kb_model = "";
-          kb_options = "caps:ctrl_modifier,caps:nocaps";
-          kb_rules = "";
+        kb_layout = "us";
+        kb_variant = "";
+        kb_model = "";
+        kb_options = "caps:ctrl_modifier,caps:nocaps";
+        kb_rules = "";
 
-          follow_mouse = 1;
+        follow_mouse = 1;
 
-          sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
-          touchpad = {
-              natural_scroll = false;
-              disable_while_typing = false;
-              tap-to-click = true;
-              drag_lock = true;
-              scroll_factor = 0.5;
-          };
+        touchpad = {
+          natural_scroll = false;
+          disable_while_typing = false;
+          tap-to-click = true;
+          drag_lock = true;
+          scroll_factor = 0.5;
+        };
       };
 
       gestures = {
-          workspace_swipe = false;
+        workspace_swipe = false;
       };
 
       device = {
-          name = "epic-mouse-v1";
-          sensitivity = -0.5;
+        name = "epic-mouse-v1";
+        sensitivity = -0.5;
       };
 
       "$mainmod" = "super"; # sets "windows" key as main modifier
@@ -417,7 +419,7 @@ in
         "opacity 1.0,class:zen.*,title:.*YouTube.*"
       ];
 
-      exec-once = ''${startScript}/bin/start'';
+      exec-once = "${startScript}/bin/start";
     };
   };
 }
