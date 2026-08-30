@@ -31,9 +31,13 @@
     },
     "bar": {
       "width": 12,
-      "charElapsed": "■",
-      "borderLeft": "[",
-      "borderRight": "]",
+      "char": {
+        "elapsed": "■",
+      },
+      "border": {
+        "left": "[",
+        "right": "]",
+      },
       "charTotal": " "
     },
     "percent": {
