@@ -2,7 +2,7 @@
 
 let
   _changeWallpaper = pkgs.pkgs.writeShellScriptBin "_changewp" ''
-    swww img --resize=crop "$1"
+    awww img --resize=crop "$1"
   '';
 
   _wallpaperLocation = config.home.homeDirectory + "/Pictures/Wallpapers/";
@@ -79,7 +79,7 @@ let
   '';
 
   startScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    swww-daemon &
+    awww-daemon &
     ${shuffleWallpaper}/bin/shufflewallpaper &
 
     hyprctl setcursor Hackneyed 24 &

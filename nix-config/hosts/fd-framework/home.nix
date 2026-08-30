@@ -43,13 +43,13 @@
     discord
     gpick
     graphicsmagick
-    libreoffice-qt6-fresh
+    libreoffice-qt-stable
     localsend
     lutris
     obsidian
     parsec-bin
+    pear-desktop # Youtube Music client
     vlc
-    youtube-music
 
     # Hobbies
     sdrpp

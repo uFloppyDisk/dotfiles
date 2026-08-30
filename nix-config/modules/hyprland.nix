@@ -26,6 +26,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
+      awww
       brightnessctl
       copyq
       dunst
@@ -40,7 +41,6 @@ in
       pavucontrol
       playerctl
       rofi
-      swww
       waybar
       (pkgs.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

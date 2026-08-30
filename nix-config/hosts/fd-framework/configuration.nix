@@ -85,8 +85,8 @@
 
   environment.systemPackages = with pkgs; [
     protonup-qt
-    wineWowPackages.stable
-    wineWowPackages.waylandFull
+    wineWow64Packages.stable
+    wineWow64Packages.waylandFull
     winetricks
   ];
 
