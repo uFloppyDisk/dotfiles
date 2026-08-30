@@ -1,7 +1,14 @@
-{ pkgs, inputs, system, ... }:
+{
+  pkgs,
+  inputs,
+  system,
+  lib,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
   ];
@@ -14,8 +21,8 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   hardware.graphics.enable32Bit = true;
-  hardware.graphics.extraPackages = with pkgs; [ amdvlk ];
-  hardware.graphics.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+  # hardware.graphics.extraPackages = with pkgs; [ amdvlk ];
+  # hardware.graphics.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
 
   nix.gc = {
     automatic = true;
@@ -24,8 +31,7 @@
   };
 
   networking.hostName = "fd-framework"; # Define your hostname.
-  networking.wireless.enable =
-    false; # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = lib.mkForce false; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -84,7 +90,9 @@
     winetricks
   ];
 
-  virtualisation.docker = { enable = true; };
+  virtualisation.docker = {
+    enable = true;
+  };
 
   virtualisation.virtualbox.host = {
     enable = true;
@@ -111,7 +119,9 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs system; };
-    users = { "floppydisk" = import ./home.nix; };
+    users = {
+      "floppydisk" = import ./home.nix;
+    };
     backupFileExtension = "bak";
   };
 

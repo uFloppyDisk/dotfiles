@@ -58,7 +58,7 @@
     docker-client
     k9s
     kubectl
-    minikube
+    # minikube
     skaffold
 
     # Langs & SDKs

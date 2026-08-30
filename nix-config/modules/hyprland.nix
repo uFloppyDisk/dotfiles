@@ -1,8 +1,15 @@
-{ pkgs, lib, inputs, config, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}:
 
 let
   cfg = config.fd.hyprland;
-in {
+in
+{
   options = {
     fd.hyprland = {
       enable = lib.mkEnableOption "setup FD hyprland";
@@ -10,7 +17,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    security.pam.services.hyprlock = {};
+    security.pam.services.hyprlock = { };
 
     programs.hyprland = {
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
@@ -32,13 +39,12 @@ in {
       networkmanagerapplet
       pavucontrol
       playerctl
-      rofi-wayland
+      rofi
       swww
       waybar
       (pkgs.waybar.overrideAttrs (oldAttrs: {
-          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-        })
-      )
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      }))
     ];
 
     xdg.portal = {
