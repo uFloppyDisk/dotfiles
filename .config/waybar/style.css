@@ -259,3 +259,18 @@ label:focus {
   border: solid @red-500 1px;
   background-color: @red-500;
 }
+
+menu {
+  border-radius: 0px;
+  border: solid @red-500 1px;
+  background: @red-950;
+  padding: 0;
+}
+
+menuitem {
+  border-radius: 0px;
+}
+
+menuitem:hover {
+  background: @red-800;
+}
