@@ -194,7 +194,7 @@ in
       hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 
       -- Keep the generated HyprDynamicMonitors configuration active.
-      hl.exec_cmd("hyprctl keyword source ~/.config/hypr/monitors.conf")
+      require("~/.config/hypr/monitors.lua")
 
       hl.env("XCURSOR_SIZE", "24")
       hl.env("HYPRCURSOR_SIZE", "24")
