@@ -287,7 +287,8 @@ in
       hl.bind(mainMod .. " + Q", hl.dsp.window.close())
       hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exit())
       hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
-      hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = 1 }))
+      hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized" }))
+      hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
       hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
       hl.bind(mainMod .. " + U", hl.dsp.layout("togglesplit"))
 
