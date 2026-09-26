@@ -5,3 +5,8 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
+for _, mode in ipairs({ "n", "i", "v" }) do
+  vim.keymap.del(mode, "<A-j>")
+  vim.keymap.del(mode, "<A-k>")
+end
