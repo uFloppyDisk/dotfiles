@@ -1,13 +1,13 @@
 return {
 	"folke/trouble.nvim",
 	cmd = "Trouble",
-	config = function()
-		require("trouble").setup({})
-		vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", {})
-		vim.keymap.set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", {})
-		vim.keymap.set("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", {})
-		vim.keymap.set("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false<cr>", {})
-		vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", {})
-		vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", {})
-	end,
+	opts = {},
+	keys = {
+		{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
+		{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics" },
+		{ "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols" },
+		{ "<leader>cl", "<cmd>Trouble lsp toggle focus=false<cr>", desc = "LSP Definitions / References" },
+		{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List" },
+		{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List" },
+	},
 }

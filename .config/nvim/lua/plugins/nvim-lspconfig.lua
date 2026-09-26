@@ -1,32 +1,3 @@
-local on_attach = function(_, bufnr)
-  local opts = { buffer = bufnr, remap = false }
-
-  vim.keymap.set("n", "gd", function()
-    vim.lsp.buf.definition()
-  end, opts)
-  vim.keymap.set("n", "K", function()
-    vim.lsp.buf.hover()
-  end, opts)
-  vim.keymap.set("n", "<leader>vws", function()
-    vim.lsp.buf.workspace_symbol()
-  end, opts)
-  vim.keymap.set("n", "<leader>vd", function()
-    vim.diagnostic.open_float()
-  end, opts)
-  vim.keymap.set("n", "<leader>vca", function()
-    vim.lsp.buf.code_action()
-  end, opts)
-  vim.keymap.set("n", "<leader>vrr", function()
-    vim.lsp.buf.references()
-  end, opts)
-  vim.keymap.set("n", "<leader>vrn", function()
-    vim.lsp.buf.rename()
-  end, opts)
-  vim.keymap.set("i", "<C-h>", function()
-    vim.lsp.buf.signature_help()
-  end, opts)
-end
-
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -36,18 +7,30 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "L3MON4D3/LuaSnip",
   },
-  config = function()
+  opts = function(_, opts)
+    opts.servers = opts.servers or {}
+    opts.servers["*"] = opts.servers["*"] or {}
+    opts.servers["*"].keys = opts.servers["*"].keys or {}
+
+    vim.list_extend(opts.servers["*"].keys, {
+      { "gd", vim.lsp.buf.definition, desc = "Go to Definition" },
+      { "K", vim.lsp.buf.hover, desc = "Hover Documentation" },
+      { "<leader>vws", vim.lsp.buf.workspace_symbol, desc = "Workspace Symbols" },
+      { "<leader>vd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+      { "<leader>vca", vim.lsp.buf.code_action, desc = "Code Action" },
+      { "<leader>vrr", vim.lsp.buf.references, desc = "References" },
+      { "<leader>vrn", vim.lsp.buf.rename, desc = "Rename Symbol" },
+      { "<C-h>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
+    })
+  end,
+  config = function(_, opts)
     local cmp = require("cmp")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local luasnip = require("luasnip")
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    vim.api.nvim_create_autocmd("LspAttach", {
-      callback = function(event)
-        on_attach("", event.buf)
-      end,
-    })
+    require("lazyvim.plugins.lsp.keymaps").set({}, opts.servers["*"].keys)
 
     local vue_language_server_path = vim.fn.stdpath("data")
       .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
@@ -68,8 +51,7 @@ return {
     }
     local vtsls_config = {
       capabilities = capabilities,
-      on_attach = function(content, bufnr)
-        on_attach(content, bufnr)
+      on_attach = function(_, bufnr)
         -- -- Define common ESLint config files
         -- local eslint_configs = {
         -- 	".eslintrc",
@@ -118,7 +100,6 @@ return {
     }
     local vue_ls_config = {
       capabilities = capabilities,
-      on_attach = on_attach,
     }
 
     vim.lsp.config("vtsls", vtsls_config)
