@@ -1,3 +1,45 @@
+local function go_to_definition()
+  vim.lsp.buf.definition({
+    on_list = function(options)
+      local items = {}
+      local seen = {}
+
+      for _, item in ipairs(options.items) do
+        local filename = item.filename
+        if not filename and item.bufnr then
+          filename = vim.api.nvim_buf_get_name(item.bufnr)
+        end
+
+        local key = table.concat({
+          vim.fs.normalize(filename or ""),
+          item.lnum or 0,
+          item.col or 0,
+        }, "\0")
+
+        if not seen[key] then
+          seen[key] = true
+          items[#items + 1] = item
+        end
+      end
+
+      if #items == 0 then
+        vim.notify("No locations found", vim.log.levels.INFO)
+        return
+      end
+
+      options.items = items
+      vim.fn.setqflist({}, " ", options)
+
+      if #items == 1 then
+        vim.cmd("normal! m'")
+        vim.cmd("cfirst")
+      else
+        vim.cmd("botright copen")
+      end
+    end,
+  })
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -50,7 +92,7 @@ return {
       )
 
       vim.list_extend(opts.servers["*"].keys, {
-        { "gd", vim.lsp.buf.definition, desc = "Go to Definition" },
+        { "gd", go_to_definition, desc = "Go to Definition" },
         { "K", vim.lsp.buf.hover, desc = "Hover Documentation" },
         { "<leader>vws", vim.lsp.buf.workspace_symbol, desc = "Workspace Symbols" },
         { "<leader>vd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
