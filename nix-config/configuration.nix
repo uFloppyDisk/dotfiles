@@ -42,6 +42,21 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
+    wireplumber.extraConfig."51-yamaha-mg-xu-no-suspend" = {
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            {
+              # The MG-XU is a duplex USB device. Suspending its capture side
+              # when pavucontrol closes can also interrupt playback streams.
+              "node.name" = "~alsa_(input|output).usb-Yamaha_Corporation_MG-XU.*";
+            }
+          ];
+          actions.update-props."session.suspend-timeout-seconds" = 0;
+        }
+      ];
+    };
   };
 
   programs.firefox.enable = lib.mkDefault true;
