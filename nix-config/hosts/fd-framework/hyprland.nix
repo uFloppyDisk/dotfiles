@@ -82,8 +82,6 @@ let
     awww-daemon &
     ${shuffleWallpaper}/bin/shufflewallpaper &
 
-    hyprctl setcursor Hackneyed 24 &
-
     nm-applet --indicator &
 
     waybar &
@@ -196,8 +194,10 @@ in
       -- Keep the generated HyprDynamicMonitors configuration active.
       require("~/.config/hypr/monitors.lua")
 
+      -- Hackneyed is an XCursor theme, so it must be selected before
+      -- Hyprland initializes its cursor manager.
+      hl.env("XCURSOR_THEME", "Hackneyed")
       hl.env("XCURSOR_SIZE", "24")
-      hl.env("HYPRCURSOR_SIZE", "24")
 
       hl.config({
         general = {
