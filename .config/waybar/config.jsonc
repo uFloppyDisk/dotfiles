@@ -135,7 +135,7 @@
         // }
     },
     "clock": {
-        // "timezone": "America/New_York",
+        "timezone": "America/Vancouver",
         "tooltip-format": "<tt>{calendar}</tt>",
         "format-alt": "{:%Y-%m-%d}",
         "calendar": {
