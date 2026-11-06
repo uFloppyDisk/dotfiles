@@ -38,6 +38,7 @@
     bitwarden-desktop
     btop
     fastfetch
+    fd
     gh
     gnupg
     inputs.hyprdynamicmonitors.packages.${system}.default
