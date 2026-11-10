@@ -52,6 +52,7 @@
 
     # Productivity & Utility Apps
     blender
+    chatterino7
     discord
     gpick
     graphicsmagick
